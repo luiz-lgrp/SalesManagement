@@ -38,7 +38,7 @@ namespace TestingCRUD.API.Controllers
 
             return Ok(customerVM);
         }
-
+        //teste commit
         [HttpPost("CreateCustomer")]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateInputModel model)
         {
