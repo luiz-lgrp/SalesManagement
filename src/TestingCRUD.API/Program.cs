@@ -8,6 +8,8 @@ using TestingCRUD.Domain.Repositories;
 
 using MediatR;
 using FluentValidation;
+using TestingCRUD.Infra;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var connectionString = builder.Configuration.GetConnectionString("SqlServerConnectionString");
+builder.Services.AddDbContext<CustomerContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddMediatR(typeof(Program));
 
