@@ -11,6 +11,7 @@ Projeto voltado a aplicação de testes unitários, aproveitei e apliquei CQRS +
  - ASP.NET Core 6
   - xUnit
   - SQL Server
+  - Repository Pattern
  - SOLID Principles
  - DDD  (Domain-Driven Design)
  - Clean Architecture
