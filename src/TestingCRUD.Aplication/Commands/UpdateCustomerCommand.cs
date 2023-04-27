@@ -1,5 +1,5 @@
 ﻿using TestingCRUD.Domain.Models;
-using TestingCRUD.Domain.InputModels;
+using TestingCRUD.Aplication.InputModels;
 
 using MediatR;
 

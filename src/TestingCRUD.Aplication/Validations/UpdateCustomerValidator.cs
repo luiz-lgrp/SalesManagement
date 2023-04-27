@@ -1,4 +1,4 @@
-﻿using TestingCRUD.Domain.InputModels;
+﻿using TestingCRUD.Aplication.InputModels;
 
 using FluentValidation;
 

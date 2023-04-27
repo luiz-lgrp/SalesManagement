@@ -1,4 +1,4 @@
-﻿using TestingCRUD.Domain.ViewModels;
+﻿using TestingCRUD.Aplication.ViewModels;
 using TestingCRUD.Aplication.Queries;
 using TestingCRUD.Domain.Repositories;
 

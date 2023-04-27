@@ -1,13 +1,10 @@
-﻿using TestingCRUD.Domain.Enums;
-
-namespace TestingCRUD.Domain.ViewModels
+﻿namespace TestingCRUD.Aplication.InputModels
 {
-    public class CustomerViewModel
+    public class CreateInputModel
     {
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Birthday { get; set; }
         public string Phone { get; set; }
-        public EntityStatus Status { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using TestingCRUD.Domain.Enums;
 
-namespace TestingCRUD.Domain.InputModels
+namespace TestingCRUD.Aplication.ViewModels
 {
-    public class UpdateInputModel
+    public class CustomerViewModel
     {
         public string Name { get; set; }
         public string Cpf { get; set; }

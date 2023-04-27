@@ -1,10 +1,10 @@
 using TestingCRUD.Domain.Models;
-using TestingCRUD.Domain.ViewModels;
 using TestingCRUD.Infra.Repositories;
 using TestingCRUD.Aplication.Queries;
 using TestingCRUD.Aplication.Commands;
 using TestingCRUD.Aplication.Handlers;
 using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Aplication.ViewModels;
 
 using MediatR;
 using FluentValidation;
@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+ 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
