@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TestingCRUD.Aplication.Commands
+namespace TestingCRUD.Aplication.Commands.CustomerCommands
 {
     public class RemoveCustomerCommand : IRequest
     {

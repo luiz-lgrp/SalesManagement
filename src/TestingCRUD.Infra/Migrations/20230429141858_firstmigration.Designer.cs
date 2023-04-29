@@ -12,7 +12,7 @@ using TestingCRUD.Infra;
 namespace TestingCRUD.Infra.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    [Migration("20230415192042_firstmigration")]
+    [Migration("20230429141858_firstmigration")]
     partial class firstmigration
     {
         /// <inheritdoc />
@@ -31,11 +31,14 @@ namespace TestingCRUD.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cpf")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -49,6 +52,9 @@ namespace TestingCRUD.Infra.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CustomerId");
 

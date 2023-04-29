@@ -1,10 +1,10 @@
-﻿using TestingCRUD.Aplication.ViewModels;
-using TestingCRUD.Aplication.Queries;
+﻿using MediatR;
+
 using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Aplication.Queries.CustomerQueries;
+using TestingCRUD.Aplication.ViewModels.CustomerViewModels;
 
-using MediatR;
-
-namespace TestingCRUD.Aplication.Handlers
+namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
 {
     public class GetCustomersCommandHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>
     {

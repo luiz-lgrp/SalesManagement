@@ -1,10 +1,10 @@
-﻿using TestingCRUD.Aplication.Queries;
-using TestingCRUD.Aplication.InputModels;
-using TestingCRUD.Aplication.Commands;
-
-using MediatR;
+﻿using MediatR;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+
+using TestingCRUD.Aplication.CustomerInputModels;
+using TestingCRUD.Aplication.Queries.CustomerQueries;
+using TestingCRUD.Aplication.Commands.CustomerCommands;
 
 namespace TestingCRUD.API.Controllers
 {
@@ -38,7 +38,7 @@ namespace TestingCRUD.API.Controllers
 
             return Ok(customerVM);
         }
-        //teste commit 3
+        
         [HttpPost("CreateCustomer")]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateInputModel model)
         {
