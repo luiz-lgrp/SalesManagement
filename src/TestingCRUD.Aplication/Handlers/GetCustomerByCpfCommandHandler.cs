@@ -26,9 +26,11 @@ namespace TestingCRUD.Aplication.Handlers
             {
                 Name = customer.Name,
                 Cpf = customer.Cpf,
-                Birthday = customer.Birthday,
+                Email = customer.Email,
                 Phone = customer.Phone,
-                Status = customer.Status
+                Status = customer.Status,
+                Created = customer.Created.ToString(),
+                Updated = customer.Updated.ToString()
             };
 
             return customerVM;

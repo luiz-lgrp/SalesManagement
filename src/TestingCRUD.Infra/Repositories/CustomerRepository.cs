@@ -45,7 +45,7 @@ namespace TestingCRUD.Infra.Repositories
 
             findedCustomer.Name = customer.Name;
             findedCustomer.Cpf = customer.Cpf;
-            findedCustomer.Birthday = customer.Birthday;
+            findedCustomer.Email = customer.Email;
             findedCustomer.Phone = customer.Phone;
             findedCustomer.Status = customer.Status;
 

@@ -31,7 +31,7 @@ namespace TestingCRUD.Aplication.Handlers
             var customer = new Customer(
                 createModel.Name,
                 createModel.Cpf,
-                createModel.Birthday,
+                createModel.Email,
                 createModel.Phone);
 
             var createdCustomer = await _customerRepository.CreateAsync(customer, cancellationToken);
