@@ -24,11 +24,11 @@ namespace TestingCRUD.Infra.Migrations
 
             modelBuilder.Entity("TestingCRUD.Domain.Models.Customer", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Birthday")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -47,7 +47,7 @@ namespace TestingCRUD.Infra.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
                 });

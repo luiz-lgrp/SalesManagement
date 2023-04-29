@@ -6,8 +6,10 @@ namespace TestingCRUD.Aplication.ViewModels
     {
         public string Name { get; set; }
         public string Cpf { get; set; }
-        public string Birthday { get; set; }
+        public string Email { get; set; }
         public string Phone { get; set; }
         public EntityStatus Status { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
     }
 }
