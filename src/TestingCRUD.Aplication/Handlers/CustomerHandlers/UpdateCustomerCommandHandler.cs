@@ -1,12 +1,12 @@
-﻿using TestingCRUD.Domain.Models;
-using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Commands;
-using TestingCRUD.Aplication.Validations;
-
-using MediatR;
+﻿using MediatR;
 using FluentValidation;
 
-namespace TestingCRUD.Aplication.Handlers
+using TestingCRUD.Domain.Models;
+using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Aplication.Commands.CustomerCommands;
+using TestingCRUD.Aplication.Validations.CustomerCommandValidation;
+
+namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
 {
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
     {

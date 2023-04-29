@@ -1,15 +1,16 @@
-using TestingCRUD.Domain.Models;
-using TestingCRUD.Infra.Repositories;
-using TestingCRUD.Aplication.Queries;
-using TestingCRUD.Aplication.Commands;
-using TestingCRUD.Aplication.Handlers;
-using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.ViewModels;
-
 using MediatR;
 using FluentValidation;
-using TestingCRUD.Infra;
 using Microsoft.EntityFrameworkCore;
+
+using TestingCRUD.Infra;
+using TestingCRUD.Domain.Models;
+using TestingCRUD.Infra.Repositories;
+using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Aplication.Queries.CustomerQueries;
+using TestingCRUD.Aplication.Commands.CustomerCommands;
+using TestingCRUD.Aplication.Handlers.CustomerHandlers;
+using TestingCRUD.Aplication.ViewModels.CustomerViewModels;
+using TestingCRUD.Aplication.Validations.CustomerCommandValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ builder.Services.AddDbContext<CustomerContext>(options => options.UseSqlServer(c
 
 builder.Services.AddMediatR(typeof(Program));
 
-builder.Services.AddValidatorsFromAssembly(typeof(TestingCRUD.Aplication.Validations.UpdateCustomerValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(UpdateCustomerValidator).Assembly);
 
 builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, Customer>, CreateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<UpdateCustomerCommand, Customer>, UpdateCustomerCommandHandler>();

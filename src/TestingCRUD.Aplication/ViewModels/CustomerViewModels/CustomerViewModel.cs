@@ -1,6 +1,6 @@
 ﻿using TestingCRUD.Domain.Enums;
 
-namespace TestingCRUD.Aplication.ViewModels
+namespace TestingCRUD.Aplication.ViewModels.CustomerViewModels
 {
     public class CustomerViewModel
     {
