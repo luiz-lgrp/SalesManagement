@@ -1,4 +1,4 @@
-# TestingCRUD
+# MiniVirtualStore
 
 ## Sobre
 O projeto é uma mini loja virtual feito para aplicar o que tenho aprendido sobre testes unitários, aproveitei e apliquei CQRS + Mediatr, Conceitos do SOLID e DDD...
