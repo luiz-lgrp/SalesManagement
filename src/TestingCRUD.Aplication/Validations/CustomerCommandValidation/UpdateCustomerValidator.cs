@@ -28,9 +28,6 @@ namespace TestingCRUD.Aplication.Validations.CustomerCommandValidation
                 .NotEmpty().WithMessage("Digite um telefone")
                 .Matches("^([1-9]{2})-(?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$").WithMessage("Formato de telefone inválido xx-xxxxx-xxxx")
                 .MaximumLength(14).WithMessage("Telefone não pode ter mais de 11 dígitos contando com DDD");
-
-            RuleFor(c => c.Status)
-                .IsInEnum().WithMessage("Insira um status válido, 1 para Ativo e 0 para Inativo");
         }
     }
 }

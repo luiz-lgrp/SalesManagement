@@ -47,7 +47,6 @@ namespace TestingCRUD.Infra.Repositories
             findedCustomer.Cpf = customer.Cpf;
             findedCustomer.Email = customer.Email;
             findedCustomer.Phone = customer.Phone;
-            findedCustomer.Status = customer.Status;
 
             await _customerContext.SaveChangesAsync(cancellationToken);
 

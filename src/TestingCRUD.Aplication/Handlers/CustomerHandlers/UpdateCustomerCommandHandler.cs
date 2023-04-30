@@ -39,7 +39,6 @@ namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
             customer.Cpf = updateModel.Cpf;
             customer.Email = updateModel.Email;
             customer.Phone = updateModel.Phone;
-            customer.Status = updateModel.Status;
             customer.Updated = DateTime.Now;
 
             var updatedCustomer = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);

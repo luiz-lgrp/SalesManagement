@@ -4,13 +4,13 @@ namespace TestingCRUD.Domain.Models
 {
     public abstract class BaseModel
     {
-        public EntityStatus Status { get; set; }
-        public DateTime Created { get; set; }
+        public Guid Id { get; set; }
+        public DateTime Created { get; private set; }
         public DateTime Updated { get; set; }
 
-        public BaseModel()
+        protected BaseModel()
         {
-            Status = EntityStatus.Active;
+            Id = Guid.NewGuid();
             Created = DateTime.Now;
             Updated = Created;
         }
