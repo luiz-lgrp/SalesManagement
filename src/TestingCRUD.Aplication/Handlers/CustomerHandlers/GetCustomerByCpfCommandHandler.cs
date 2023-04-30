@@ -28,9 +28,7 @@ namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
                 Cpf = customer.Cpf,
                 Email = customer.Email,
                 Phone = customer.Phone,
-                Status = customer.Status,
-                Created = customer.Created.ToString(),
-                Updated = customer.Updated.ToString()
+                Status = customer.Status
             };
 
             return customerVM;

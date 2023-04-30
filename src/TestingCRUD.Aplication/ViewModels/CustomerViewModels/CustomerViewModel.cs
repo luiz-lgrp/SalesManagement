@@ -9,7 +9,5 @@ namespace TestingCRUD.Aplication.ViewModels.CustomerViewModels
         public string Email { get; set; }
         public string Phone { get; set; }
         public EntityStatus Status { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
     }
 }
