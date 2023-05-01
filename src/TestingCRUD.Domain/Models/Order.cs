@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestingCRUD.Domain.Enums;
+﻿using TestingCRUD.Domain.Enums;
 
 namespace TestingCRUD.Domain.Models
 {
@@ -11,19 +6,21 @@ namespace TestingCRUD.Domain.Models
     {
         private List<OrderItem> _orderItems;
         private static readonly Random random = new Random();
+        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
 
-        public Guid CustomerId { get; private set; }
+        public string Cpf { get; private set; }
         public string OrderCode { get; private set; }
         public decimal TotalValue { get; private set; }
         public OrderStatus  Status { get; private set; }
 
-        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
-
-        public Order()
+        public Order(string cpf)
         {
+            Cpf = cpf;
             OrderCode = GenerateOrderCode();
-            Status = OrderStatus.Novo;
+            Status = OrderStatus.New;
             _orderItems = new List<OrderItem>();
+
+            ValidateCustomer(cpf);
         }
 
         private string GenerateOrderCode()
@@ -33,8 +30,66 @@ namespace TestingCRUD.Domain.Models
             return $"{letter}{number}";
         }
 
+        public void ValidateCustomer(string cpf)
+        {
+            //TODO: Método precisa checar se o Cpf foi cadastrado e se o cliente está Ativo (Sem acoplamente com camda Infra)
+        }
+
         public void CalculateTotalAmount() => TotalValue = _orderItems.Sum(orderItem => orderItem.CalculateValue());
 
+        public void WaitForPayment()
+        {
+            Status = OrderStatus.AwaitingPayment;
+            Updated = DateTime.Now;
+        }
 
+        public void Conclude()
+        {
+            Status = OrderStatus.Concluded;
+            Updated = DateTime.Now;
+        }
+
+        private OrderItem? ExistOrderItem(OrderItem item) =>
+            _orderItems.FirstOrDefault(orderItem => orderItem.ProductId == item.ProductId);
+
+        public void AddItemToOrder(OrderItem item)
+        {
+            item.LinkOrder(OrderCode);
+
+            if (ExistOrderItem(item) is var itemFound && itemFound is not null)
+            {
+                itemFound.AddQuantity(itemFound.Quantity);
+                item = itemFound;
+            }
+            else
+            {
+                _orderItems.Add(item);
+            }
+
+            item.CalculateValue();
+            CalculateTotalAmount();
+            Updated = DateTime.Now;
+        }
+
+        public void UpdateQuantityItem(OrderItem item, int newQuantity)
+        {
+            //TODO: Teria um jeito melhor para não estourar uma exception?
+            if (ExistOrderItem(item) is var itemFound && itemFound is null)
+                throw new Exception("Item não encontrado, item inválido");
+
+            itemFound.UpdateQuantity(newQuantity);
+            CalculateTotalAmount();
+            Updated = DateTime.Now;
+        }
+
+        public void RemoveItem(OrderItem item)
+        {
+            if (ExistOrderItem(item) is var itemFound && itemFound is null)
+                throw new Exception("Item não encontrado, item inválido");
+
+            _orderItems.Remove(itemFound);
+            CalculateTotalAmount();
+            Updated = DateTime.Now;
+        }
     }
 }

@@ -8,7 +8,8 @@ namespace TestingCRUD.Domain.Enums
 {
     public enum OrderStatus
     {
-        Novo,
-        Concluído
+        New,
+        AwaitingPayment,
+        Concluded
     }
 }
