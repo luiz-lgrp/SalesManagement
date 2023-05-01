@@ -1,7 +1,7 @@
-# MiniVirtualStore
+# SalesManagement
 
 ## Sobre
-O projeto é uma mini loja virtual feito para aplicar o que tenho aprendido sobre testes unitários, aproveitei e apliquei CQRS + Mediatr, Conceitos do SOLID e DDD...
+O projeto é um programa de gerenciamento de vendas feito para aplicar o que tenho aprendido sobre testes unitários, aproveitei e apliquei CQRS + Mediatr, Conceitos do SOLID e DDD...
 <br>
 
 
