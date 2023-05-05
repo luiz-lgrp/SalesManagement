@@ -1,7 +1,8 @@
 ﻿using TestingCRUD.Domain.Enums;
 
-namespace TestingCRUD.Aplication.CustomerInputModels
+namespace TestingCRUD.Application.CustomerInputModels
 {
+    //TODO: tirar classe desnecessária
     public class UpdateInputModel
     {
         public string Name { get; set; }

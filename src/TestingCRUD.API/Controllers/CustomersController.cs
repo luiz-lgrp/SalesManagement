@@ -2,9 +2,9 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-using TestingCRUD.Aplication.CustomerInputModels;
-using TestingCRUD.Aplication.Queries.CustomerQueries;
-using TestingCRUD.Aplication.Commands.CustomerCommands;
+using TestingCRUD.Application.CustomerInputModels;
+using TestingCRUD.Application.Queries.CustomerQueries;
+using TestingCRUD.Application.Commands.CustomerCommands;
 
 namespace TestingCRUD.API.Controllers
 {

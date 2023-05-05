@@ -1,4 +1,4 @@
-﻿namespace TestingCRUD.Aplication.CustomerInputModels
+﻿namespace TestingCRUD.Application.CustomerInputModels
 {
     public class CreateInputModel
     {

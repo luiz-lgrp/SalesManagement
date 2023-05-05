@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
 using TestingCRUD.Domain.Models;
-using TestingCRUD.Aplication.CustomerInputModels;
+using TestingCRUD.Application.CustomerInputModels;
 
-namespace TestingCRUD.Aplication.Commands.CustomerCommands
+namespace TestingCRUD.Application.Commands.CustomerCommands
 {
     public class UpdateCustomerCommand : IRequest<Customer>
     {

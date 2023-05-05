@@ -3,10 +3,10 @@ using FluentValidation;
 
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Commands.CustomerCommands;
-using TestingCRUD.Aplication.Validations.CustomerCommandValidation;
+using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
-namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
+namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
     {

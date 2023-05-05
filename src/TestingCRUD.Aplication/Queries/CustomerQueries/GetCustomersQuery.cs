@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
-using TestingCRUD.Aplication.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
 
-namespace TestingCRUD.Aplication.Queries.CustomerQueries
+namespace TestingCRUD.Application.Queries.CustomerQueries
 {
     public class GetCustomersQuery : IRequest<IEnumerable<CustomerViewModel>>
     {

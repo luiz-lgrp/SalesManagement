@@ -6,11 +6,11 @@ using TestingCRUD.Infra;
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Infra.Repositories;
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Queries.CustomerQueries;
-using TestingCRUD.Aplication.Commands.CustomerCommands;
-using TestingCRUD.Aplication.Handlers.CustomerHandlers;
-using TestingCRUD.Aplication.ViewModels.CustomerViewModels;
-using TestingCRUD.Aplication.Validations.CustomerCommandValidation;
+using TestingCRUD.Application.Queries.CustomerQueries;
+using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.Handlers.CustomerHandlers;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
