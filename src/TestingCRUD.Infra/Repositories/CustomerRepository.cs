@@ -22,36 +22,35 @@ namespace TestingCRUD.Infra.Repositories
             return customer;
         }
 
-        public async Task<Customer> DeleteAsync(string cpf, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(string cpf, CancellationToken cancellationToken)
         {
             var customerDelete = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
 
             if (customerDelete is null)
-                return null;
+                return false;
 
             _customerContext.Remove(customerDelete);
 
             _customerContext.SaveChanges();
 
-            return customerDelete;
+            return true;
         }
 
-        public async Task<Customer> UpdateAsync(string cpf, Customer customer, CancellationToken cancellationToken)
+        public async Task<bool> UpdateAsync(string cpf, Customer customer, CancellationToken cancellationToken)
         {
             var findedCustomer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf, cancellationToken);
 
             if (findedCustomer is null)
-                return null;
+                return false;
 
             findedCustomer.Name = customer.Name;
             findedCustomer.Cpf = customer.Cpf;
             findedCustomer.Email = customer.Email;
             findedCustomer.Phone = customer.Phone;
-            findedCustomer.Status = customer.Status;
 
             await _customerContext.SaveChangesAsync(cancellationToken);
 
-            return findedCustomer;
+            return true;
         }
     }
 }

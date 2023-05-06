@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Queries.CustomerQueries;
-using TestingCRUD.Aplication.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.Queries.CustomerQueries;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
-namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
+namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
     public class GetCustomerByCpfCommandHandler : IRequestHandler<GetCustomerByCpfQuery, CustomerViewModel>
     {

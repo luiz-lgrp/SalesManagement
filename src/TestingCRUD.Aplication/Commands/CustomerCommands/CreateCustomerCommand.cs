@@ -1,15 +1,15 @@
 ﻿using MediatR;
 
-using TestingCRUD.Domain.Models;
-using TestingCRUD.Aplication.CustomerInputModels;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.InputModels.CustomerInputModels;
 
-namespace TestingCRUD.Aplication.Commands.CustomerCommands
+namespace TestingCRUD.Application.Commands.CustomerCommands
 {
-    public class CreateCustomerCommand : IRequest<Customer>
+    public class CreateCustomerCommand : IRequest<CustomerViewModel>
     {
-        public CreateInputModel CreateCustomer { get; set; }
+        public CustomerInputModel CreateCustomer { get; set; }
 
-        public CreateCustomerCommand(CreateInputModel createCustomer)
+        public CreateCustomerCommand(CustomerInputModel createCustomer)
         {
             CreateCustomer = createCustomer;
         }

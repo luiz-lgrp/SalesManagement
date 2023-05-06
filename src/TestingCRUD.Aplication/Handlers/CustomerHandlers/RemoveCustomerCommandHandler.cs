@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Commands.CustomerCommands;
+using TestingCRUD.Application.Commands.CustomerCommands;
 
-namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
+namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
     public class RemoveCustomerCommandHandler : IRequestHandler<RemoveCustomerCommand>
     {

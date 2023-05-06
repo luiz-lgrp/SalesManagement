@@ -1,6 +1,6 @@
-﻿namespace TestingCRUD.Aplication.CustomerInputModels
+﻿namespace TestingCRUD.Application.InputModels.CustomerInputModels
 {
-    public class CreateInputModel
+    public class CustomerInputModel
     {
         public string Name { get; set; }
         public string Cpf { get; set; }

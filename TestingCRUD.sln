@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingCRUD.Infra", "src\Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingCRUD.Domain", "src\TestingCRUD.Domain\TestingCRUD.Domain.csproj", "{65A6195C-67F0-430B-A187-550B17098E63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingCRUD.Aplication", "src\TestingCRUD.Aplication\TestingCRUD.Aplication.csproj", "{39F38B94-A06A-4797-B6F6-79D9C6D05F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingCRUD.Application", "src\TestingCRUD.Aplication\TestingCRUD.Application.csproj", "{39F38B94-A06A-4797-B6F6-79D9C6D05F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingCRUD.Test", "src\TestingCRUD.Test\TestingCRUD.Test.csproj", "{C790AE44-B647-4D4A-81E4-635A23FD812D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingCRUD.Test", "src\TestingCRUD.Test\TestingCRUD.Test.csproj", "{C790AE44-B647-4D4A-81E4-635A23FD812D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

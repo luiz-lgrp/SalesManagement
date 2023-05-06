@@ -3,12 +3,12 @@ using FluentValidation;
 
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Aplication.Commands.CustomerCommands;
-using TestingCRUD.Aplication.Validations.CustomerCommandValidation;
+using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
-namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
+namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
-    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
+    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerReadRepository _customerReadRepository;
@@ -19,7 +19,7 @@ namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
             _customerReadRepository = customerReadRepository;
         }
 
-        public async Task<Customer> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var updateModel = request.UpdateCustomer;
 
@@ -33,18 +33,17 @@ namespace TestingCRUD.Aplication.Handlers.CustomerHandlers
             var customer = await _customerReadRepository.GetByCpf(request.Cpf, cancellationToken);
 
             if (customer is null)
-                return null!;
+                return false;
 
             customer.Name = updateModel.Name;
             customer.Cpf = updateModel.Cpf;
             customer.Email = updateModel.Email;
             customer.Phone = updateModel.Phone;
-            customer.Status = updateModel.Status;
             customer.Updated = DateTime.Now;
 
-            var updatedCustomer = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);
+            var IsUpToDate = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);
 
-            return updatedCustomer;
+            return IsUpToDate;
         }
     }
 }
