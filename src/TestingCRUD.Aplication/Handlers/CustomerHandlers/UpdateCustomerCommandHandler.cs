@@ -31,7 +31,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             }
 
             var customer = await _customerReadRepository.GetByCpf(request.Cpf, cancellationToken);
-
+            
             if (customer is null)
                 return false;
 
@@ -42,7 +42,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             customer.Updated = DateTime.Now;
 
             var IsUpToDate = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);
-
+            
             return IsUpToDate;
         }
     }

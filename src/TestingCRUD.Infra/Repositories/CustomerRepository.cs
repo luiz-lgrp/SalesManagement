@@ -14,9 +14,14 @@ namespace TestingCRUD.Infra.Repositories
             _customerContext = customerContext;
         }
 
+        public async Task SaveChangesAsync()
+        {
+            await _customerContext.SaveChangesAsync();
+        }
+
         public async Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken)
         {
-            _customerContext.Customers.AddAsync(customer, cancellationToken);
+            await _customerContext.Customers.AddAsync(customer, cancellationToken);
             await _customerContext.SaveChangesAsync();
 
             return customer;
@@ -31,7 +36,7 @@ namespace TestingCRUD.Infra.Repositories
 
             _customerContext.Remove(customerDelete);
 
-            _customerContext.SaveChanges();
+            await _customerContext.SaveChangesAsync();
 
             return true;
         }

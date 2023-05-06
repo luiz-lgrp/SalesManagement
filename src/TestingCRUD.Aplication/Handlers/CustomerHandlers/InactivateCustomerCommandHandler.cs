@@ -5,12 +5,12 @@ using TestingCRUD.Application.Commands.CustomerCommands;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
-    public class RemoveCustomerCommandHandler : IRequestHandler<RemoveCustomerCommand, bool>
+    public class InactivateCustomerCommandHandler : IRequestHandler<InactivateCustomerCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerReadRepository _customerReadRepository;
 
-        public RemoveCustomerCommandHandler(
+        public InactivateCustomerCommandHandler(
             ICustomerRepository customerRepository, 
             ICustomerReadRepository customerReadRepository)
         {
@@ -18,16 +18,20 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             _customerReadRepository = customerReadRepository;
         }
 
-        public async Task<bool> Handle(RemoveCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(InactivateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = await _customerReadRepository.GetByCpf(request.Cpf, cancellationToken);
+            var cpfCustomer = request.Cpf;
+
+            var customer = await _customerReadRepository.GetByCpf(cpfCustomer, cancellationToken);
 
             if (customer is null)
                 return false;
 
-            var customerDeleted = await _customerRepository.DeleteAsync(request.Cpf, cancellationToken);
+            customer.Inactive();
 
-            return customerDeleted;
+           await _customerRepository.SaveChangesAsync();
+
+           return true;
         }
     }
 }

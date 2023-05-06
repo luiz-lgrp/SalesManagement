@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+
 using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.Commands.CustomerCommands;
 using TestingCRUD.Application.InputModels.CustomerInputModels;
@@ -21,7 +22,6 @@ namespace TestingCRUD.API.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-
             var customersVM = await _mediator.Send(new GetCustomersQuery());
 
             return Ok(customersVM);
@@ -83,19 +83,23 @@ namespace TestingCRUD.API.Controllers
             }
         }
 
-       
+        [HttpPut("Inactivate")]
+        public async Task<IActionResult> Inactivate([FromQuery] string cpf)
+        {
+            var inactivateCustomer = await _mediator.Send(new InactivateCustomerCommand(cpf));
+
+            return Ok(inactivateCustomer);
+        }
 
         [HttpDelete("RemoveCustomer")]
         public async Task<IActionResult> RemoveCustomer([FromQuery] string cpf)
         {
-            var customer = await _mediator.Send(new GetCustomerByCpfQuery(cpf));
+            var customerDeleted = await _mediator.Send(new RemoveCustomerCommand(cpf));
 
-            if (customer is null)
-                return NotFound("O cliente não foi encontrado.");
+            if (customerDeleted is false) 
+                return NotFound("Cliente não encontrado");
 
-            await _mediator.Send(new RemoveCustomerCommand(cpf));
-
-            return NoContent();
+            return Ok(customerDeleted);
         }
     }
 }
