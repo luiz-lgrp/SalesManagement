@@ -9,6 +9,7 @@ namespace TestingCRUD.Infra.Migrations
     public partial class firstmigration : Migration
     {
         /// <inheritdoc />
+        //TODO: LEMBRE-SE DE EFETUAR UMA NOVA MIGRAÇÃO
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(

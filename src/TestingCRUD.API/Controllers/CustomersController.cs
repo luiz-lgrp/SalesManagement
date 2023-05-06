@@ -83,6 +83,8 @@ namespace TestingCRUD.API.Controllers
             }
         }
 
+       
+
         [HttpDelete("RemoveCustomer")]
         public async Task<IActionResult> RemoveCustomer([FromQuery] string cpf)
         {
