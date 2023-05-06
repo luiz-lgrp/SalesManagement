@@ -8,7 +8,7 @@ using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
-    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
+    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerReadRepository _customerReadRepository;
@@ -19,7 +19,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             _customerReadRepository = customerReadRepository;
         }
 
-        public async Task<Customer> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var updateModel = request.UpdateCustomer;
 
@@ -33,7 +33,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             var customer = await _customerReadRepository.GetByCpf(request.Cpf, cancellationToken);
 
             if (customer is null)
-                return null!;
+                return false;
 
             customer.Name = updateModel.Name;
             customer.Cpf = updateModel.Cpf;
@@ -41,9 +41,9 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             customer.Phone = updateModel.Phone;
             customer.Updated = DateTime.Now;
 
-            var updatedCustomer = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);
+            var IsUpToDate = await _customerRepository.UpdateAsync(request.Cpf, customer, cancellationToken);
 
-            return updatedCustomer;
+            return IsUpToDate;
         }
     }
 }

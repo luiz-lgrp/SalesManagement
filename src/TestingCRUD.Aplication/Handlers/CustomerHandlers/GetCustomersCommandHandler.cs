@@ -28,7 +28,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
                 Cpf = customer.Cpf,
                 Email = customer.Email,
                 Phone = customer.Phone,
-                Status = customer.Status
+                Status = customer. Status
             });
 
             return customersVM;

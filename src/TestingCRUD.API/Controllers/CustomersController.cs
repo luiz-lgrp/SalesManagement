@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-
-using TestingCRUD.Application.CustomerInputModels;
 using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.API.Controllers
 {
@@ -40,7 +39,7 @@ namespace TestingCRUD.API.Controllers
         }
         
         [HttpPost("CreateCustomer")]
-        public async Task<IActionResult> CreateCustomer([FromBody] CreateInputModel model)
+        public async Task<IActionResult> CreateCustomer([FromBody] CustomerInputModel model)
         {
             try
             {
@@ -61,13 +60,13 @@ namespace TestingCRUD.API.Controllers
         }
 
         [HttpPut("UpdateCustomer")]
-        public async Task<IActionResult> UpdateCustomer([FromQuery] string cpf, [FromBody] UpdateInputModel model)
+        public async Task<IActionResult> UpdateCustomer([FromQuery] string cpf, [FromBody] CustomerInputModel model)
         {
             try
             {
                 var updateCustomer = await _mediator.Send(new UpdateCustomerCommand(cpf, model));
 
-                if (updateCustomer is null)
+                if (updateCustomer is false)
                     return NotFound("O cliente não foi encontrado.");
 
                 return NoContent();

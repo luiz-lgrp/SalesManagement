@@ -18,12 +18,18 @@ namespace TestingCRUD.Infra.Repositories
         {
             var customers = await _customerContext.Customers.ToListAsync();
 
+            if (!customers.Any())
+                return Enumerable.Empty<Customer>();
+
             return customers;
         }
 
         public async Task<Customer> GetByCpf(string cpf, CancellationToken cancellationToken)
         {
             var customer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
+
+            if (customer == null) 
+                return null;
 
             return customer;
         }

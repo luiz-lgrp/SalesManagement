@@ -3,7 +3,7 @@
     public class OrderItem : BaseModel
     {
         public Guid ProductId { get; private set; }
-        public string OrderCode { get; private set; }
+        public string? OrderCode { get; private set; }
         public string ProductName { get; private set; }
         public int Quantity { get; private set; }
         public decimal UnitValue  { get; private set; }

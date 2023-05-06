@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestingCRUD.Aplication\TestingCRUD.Aplication.csproj" />
+    <ProjectReference Include="..\TestingCRUD.Aplication\TestingCRUD.Application.csproj" />
     <!--<ProjectReference Include="..\TestingCRUD.Domain\TestingCRUD.Domain.csproj" />-->
     <ProjectReference Include="..\TestingCRUD.Infra\TestingCRUD.Infra.csproj" />
   </ItemGroup>

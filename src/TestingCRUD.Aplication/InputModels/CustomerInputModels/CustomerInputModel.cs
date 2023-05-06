@@ -1,9 +1,6 @@
-﻿using TestingCRUD.Domain.Enums;
-
-namespace TestingCRUD.Application.CustomerInputModels
+﻿namespace TestingCRUD.Application.InputModels.CustomerInputModels
 {
-    //TODO: tirar classe desnecessária
-    public class UpdateInputModel
+    public class CustomerInputModel
     {
         public string Name { get; set; }
         public string Cpf { get; set; }

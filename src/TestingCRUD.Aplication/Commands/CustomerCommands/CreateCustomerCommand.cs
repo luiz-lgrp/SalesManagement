@@ -1,15 +1,15 @@
 ﻿using MediatR;
 
-using TestingCRUD.Domain.Models;
-using TestingCRUD.Application.CustomerInputModels;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.Application.Commands.CustomerCommands
-{//TODO: Update não retorna nada (so um bool) ou create se for pra retornar retorno um view model
-    public class CreateCustomerCommand : IRequest<Customer>
+{
+    public class CreateCustomerCommand : IRequest<CustomerViewModel>
     {
-        public CreateInputModel CreateCustomer { get; set; }
+        public CustomerInputModel CreateCustomer { get; set; }
 
-        public CreateCustomerCommand(CreateInputModel createCustomer)
+        public CreateCustomerCommand(CustomerInputModel createCustomer)
         {
             CreateCustomer = createCustomer;
         }

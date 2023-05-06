@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
-
-using TestingCRUD.Application.CustomerInputModels;
+using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.Application.Validations.CustomerCommandValidation
 {
-    public class CreateCustomerValidator : AbstractValidator<CreateInputModel>
+    public class CreateCustomerValidator : AbstractValidator<CustomerInputModel>
     {
         public CreateCustomerValidator()
         {

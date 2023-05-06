@@ -4,11 +4,12 @@ using FluentValidation;
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
 using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers
 {
-    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Customer>
+    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerViewModel>
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -17,7 +18,7 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
             _customerRepository = customerRepository;
         }
 
-        public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerViewModel> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var createModel = request.CreateCustomer;
 
@@ -36,7 +37,19 @@ namespace TestingCRUD.Application.Handlers.CustomerHandlers
 
             var createdCustomer = await _customerRepository.CreateAsync(customer, cancellationToken);
 
-            return createdCustomer;
+            if (createdCustomer is null)
+                return null;
+
+            var customerVM = new CustomerViewModel
+            {
+                Name = createdCustomer.Name,
+                Cpf = createdCustomer.Cpf,
+                Email = createdCustomer.Email,
+                Phone = createdCustomer.Phone,
+                Status = createdCustomer.Status,
+            };
+
+            return customerVM;
         }
     }
 }

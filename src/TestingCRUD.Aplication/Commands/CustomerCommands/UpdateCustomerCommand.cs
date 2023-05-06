@@ -1,16 +1,15 @@
 ﻿using MediatR;
 
-using TestingCRUD.Domain.Models;
-using TestingCRUD.Application.CustomerInputModels;
+using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.Application.Commands.CustomerCommands
 {
-    public class UpdateCustomerCommand : IRequest<Customer>
+    public class UpdateCustomerCommand : IRequest<bool>
     {
         public string Cpf { get; set; }
-        public UpdateInputModel UpdateCustomer { get; set; }
+        public CustomerInputModel UpdateCustomer { get; set; }
 
-        public UpdateCustomerCommand(string cpf, UpdateInputModel updateCustomer)
+        public UpdateCustomerCommand(string cpf, CustomerInputModel updateCustomer)
         {
             Cpf = cpf;
             UpdateCustomer = updateCustomer;
