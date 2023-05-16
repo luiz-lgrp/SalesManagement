@@ -2,15 +2,10 @@
 
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
-namespace TestingCRUD.Application.Queries.CustomerQueries
+namespace TestingCRUD.Application.Queries.CustomerQueries;
+public class GetCustomerByCpfQuery : IRequest<CustomerViewModel>
 {
-    public class GetCustomerByCpfQuery : IRequest<CustomerViewModel>
-    {
-        public string Cpf { get; set; }
+    public string Cpf { get; set; }
 
-        public GetCustomerByCpfQuery(string cpf)
-        {
-            Cpf = cpf;
-        }
-    }
+    public GetCustomerByCpfQuery(string cpf) => Cpf = cpf;
 }

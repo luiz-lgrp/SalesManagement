@@ -1,7 +1,5 @@
-﻿namespace TestingCRUD.Application.Validations.CustomerCommandValidation
+﻿namespace TestingCRUD.Application.Validations.CustomerCommandValidation;
+public class UpdateCustomerValidator : CreateCustomerValidator
 {
-    public class UpdateCustomerValidator : CreateCustomerValidator
-    {
-       
-    }
+   
 }
