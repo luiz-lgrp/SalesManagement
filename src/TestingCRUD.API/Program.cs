@@ -31,9 +31,10 @@ builder.Services.AddValidatorsFromAssembly(typeof(UpdateCustomerValidator).Assem
 builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, CustomerViewModel>, CreateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, UpdateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<InactivateCustomerCommand, bool>, InactivateCustomerCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<ActivateCustomerCommand, bool>, ActivateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<RemoveCustomerCommand, bool>, RemoveCustomerCommandHandler>();
-builder.Services.AddScoped<IRequestHandler<GetCustomerByCpfQuery, CustomerViewModel>, GetCustomerByCpfCommandHandler>();
-builder.Services.AddScoped<IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>, GetCustomersCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<GetCustomerByCpfQuery, CustomerViewModel>, GetCustomerByCpfQueryHandler>();
+builder.Services.AddScoped<IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>, GetCustomersQueryHandler>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();

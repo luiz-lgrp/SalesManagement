@@ -22,4 +22,8 @@
     <ProjectReference Include="..\TestingCRUD.Domain\TestingCRUD.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="QueryHandlers\OrdemQueryHandlers\" />
+  </ItemGroup>
+
 </Project>

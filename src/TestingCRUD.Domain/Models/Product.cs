@@ -3,9 +3,9 @@
 namespace TestingCRUD.Domain.Models;
 public class Product : BaseModel
 {
-    public string ProductName { get; private set; }
-    public int Stock { get; private set; }
-    public decimal Price { get; private set; }
+    public string ProductName { get; set; }
+    public int Stock { get; set; }
+    public decimal Price { get; set; }
     public EntityStatus Status { get; private set; }
 
     public Product(string productName, int stock, decimal price)

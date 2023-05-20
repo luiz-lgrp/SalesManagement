@@ -14,10 +14,7 @@ public class CustomersController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public CustomersController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public CustomersController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
@@ -105,7 +102,7 @@ public class CustomersController : ControllerBase
     [HttpPut("Activate")]
     public async Task<IActionResult> Activate([FromQuery] string cpf)
     {
-        var inactivateCustomer = await _mediator.Send(new InactivateCustomerCommand(cpf));
+        var inactivateCustomer = await _mediator.Send(new ActivateCustomerCommand(cpf));
 
         return Ok(inactivateCustomer);
     }

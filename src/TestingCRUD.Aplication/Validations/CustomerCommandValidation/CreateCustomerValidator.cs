@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.Application.Validations.CustomerCommandValidation;

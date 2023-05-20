@@ -5,11 +5,11 @@ using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
-public class GetCustomersCommandHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>
+public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>
 {
     private readonly ICustomerReadRepository _customerReadRepository;
 
-    public GetCustomersCommandHandler(ICustomerReadRepository customerReadRepository)
+    public GetCustomersQueryHandler(ICustomerReadRepository customerReadRepository)
     {
         _customerReadRepository = customerReadRepository;
     }
