@@ -6,9 +6,9 @@ using TestingCRUD.Domain.Repositories;
 namespace TestingCRUD.Infra.Repositories;
 public class CustomerReadRepository : ICustomerReadRepository
 {
-    private readonly CustomerContext _customerContext;
+    private readonly Context _customerContext;
 
-    public CustomerReadRepository(CustomerContext customerContext)
+    public CustomerReadRepository(Context customerContext)
     {
         _customerContext = customerContext;
     }
@@ -23,7 +23,7 @@ public class CustomerReadRepository : ICustomerReadRepository
         return customers;
     }
 
-    public async Task<Customer> GetByCpf(string cpf, CancellationToken cancellationToken)
+    public async Task<Customer?> GetByCpf(string cpf, CancellationToken cancellationToken)
     {
         var customer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
 

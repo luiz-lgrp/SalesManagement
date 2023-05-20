@@ -1,12 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace TestingCRUD.Infra.Repositories
+using TestingCRUD.Domain.Models;
+using TestingCRUD.Domain.Repositories;
+
+namespace TestingCRUD.Infra.Repositories;
+public class ProductRepository : IProductRepository
 {
-    internal class ProductRepository
+    private readonly Context _context;
+    //TODO: VERIFIQUE SE A MIGRATION DE ESTÁ FUNCIONANDO, FOI FEITO UMA MUDANÇA NO CONTEXTO
+    public ProductRepository(Context context) => _context = context;
+
+    public async Task SaveChangesAsync()
     {
+        await _context.SaveChangesAsync();
     }
+
+    public async Task<Product> CreateAsync(Product product, CancellationToken cancellationToken)
+    {
+        await _context.Products.AddAsync(product, cancellationToken);
+        await _context.SaveChangesAsync();
+        
+        return product;
+    }
+
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var productDelete = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        
+        if (productDelete is null)
+            return false;
+
+        _context.Products.Remove(productDelete);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
 }

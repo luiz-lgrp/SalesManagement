@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace TestingCRUD.Infra.Migrations;
 
-[DbContext(typeof(CustomerContext))]
+[DbContext(typeof(Context))]
 partial class CustomerContextModelSnapshot : ModelSnapshot
 {
     protected override void BuildModel(ModelBuilder modelBuilder)
