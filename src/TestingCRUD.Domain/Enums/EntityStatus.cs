@@ -1,8 +1,6 @@
-﻿namespace TestingCRUD.Domain.Enums
+﻿namespace TestingCRUD.Domain.Enums;
+public enum EntityStatus
 {
-    public enum EntityStatus
-    {
-        Inactive,
-        Active,
-    }
+    Inactive,
+    Active,
 }

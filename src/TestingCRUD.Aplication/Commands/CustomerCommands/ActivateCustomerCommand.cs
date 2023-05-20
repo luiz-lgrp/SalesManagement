@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
 namespace TestingCRUD.Application.Commands.CustomerCommands;
-public class RemoveCustomerCommand : IRequest<bool>
+public class ActivateCustomerCommand : IRequest<bool>
 {
     public string Cpf { get; set; }
 
-    public RemoveCustomerCommand(string cpf) => Cpf = cpf;
+    public ActivateCustomerCommand(string cpf) => Cpf = cpf;  
 }
