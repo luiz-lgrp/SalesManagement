@@ -16,9 +16,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+	  <PackageReference Include="MediatR" Version="11.1.0" />
+	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestingCRUD.Aplication\TestingCRUD.Application.csproj" />
     <ProjectReference Include="..\TestingCRUD.Domain\TestingCRUD.Domain.csproj" />
   </ItemGroup>
 

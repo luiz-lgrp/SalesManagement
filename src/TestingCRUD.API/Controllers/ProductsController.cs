@@ -53,4 +53,14 @@ public class ProductsController : ControllerBase
         }
     }
 
+    [HttpDelete("RemoveProduct")]
+    public async Task<IActionResult> RemoveProduct([FromQuery] Guid id)
+    {
+        var productDeleted = await _mediator.Send(new RemoveProductCommand(id));
+
+        if (productDeleted is false)
+            return NotFound("Produto não encontrado");
+
+        return Ok(productDeleted);
+    }
 }

@@ -24,7 +24,7 @@ public class RemoveCustomerCommandHandler : IRequestHandler<RemoveCustomerComman
         if (customer is null)
             return false;
 
-        var customerDeleted = await _customerRepository.DeleteAsync(request.Cpf, cancellationToken);
+        var customerDeleted = await _customerRepository.DeleteAsync(customer.Cpf, cancellationToken);
 
         return customerDeleted;
     }

@@ -19,7 +19,7 @@ public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnum
         var customers = await _customerReadRepository.GetAll(cancellationToken);
 
         if (customers is null)
-            return null!;
+            return null!;  //TODO: Mudar para um Ienumerable empty?
 
         var customersVM = customers.Select(customer => new CustomerViewModel
         {
