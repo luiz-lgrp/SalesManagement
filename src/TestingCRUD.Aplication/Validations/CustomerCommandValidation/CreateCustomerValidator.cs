@@ -8,7 +8,7 @@ public class CreateCustomerValidator : AbstractValidator<CustomerInputModel>
     public CreateCustomerValidator()
     {
         RuleFor(c => c.Name)
-           .NotEmpty().WithMessage("Digite o seu nome")
+           .NotEmpty().WithMessage("Digite um nome")
            .MaximumLength(30).WithMessage("O campo nome não pode passar de 30 caracteres")
            .MinimumLength(3).WithMessage("O campo nome não pode ser menor que 02 caracteres");
 

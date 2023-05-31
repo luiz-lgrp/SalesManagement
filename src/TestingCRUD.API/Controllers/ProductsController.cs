@@ -1,10 +1,10 @@
-﻿using FluentValidation;
-using MediatR;
-
+﻿using MediatR;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using TestingCRUD.Application.Commands.CustomerCommands;
-using TestingCRUD.Application.InputModels.ProductInputModels;
+
 using TestingCRUD.Application.Queries.ProductQueries;
+using TestingCRUD.Application.Commands.ProductCommands;
+using TestingCRUD.Application.InputModels.ProductInputModels;
 
 namespace TestingCRUD.API.Controllers;
 
@@ -51,4 +51,16 @@ public class ProductsController : ControllerBase
 
             return BadRequest(new { message = "Ocorreram erros na validação", errors });
         }
+    }
+
+    [HttpDelete("RemoveProduct")]
+    public async Task<IActionResult> RemoveProduct([FromQuery] Guid id)
+    {
+        var productDeleted = await _mediator.Send(new RemoveProductCommand(id));
+
+        if (productDeleted is false)
+            return NotFound("Produto não encontrado");
+
+        return Ok(productDeleted);
+    }
 }

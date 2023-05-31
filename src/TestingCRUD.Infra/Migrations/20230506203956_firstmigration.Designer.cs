@@ -11,7 +11,7 @@ using TestingCRUD.Infra;
 
 namespace TestingCRUD.Infra.Migrations
 {
-    [DbContext(typeof(CustomerContext))]
+    [DbContext(typeof(Context))]
     [Migration("20230506203956_firstmigration")]
     partial class firstmigration
     {

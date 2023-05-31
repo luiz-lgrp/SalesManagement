@@ -15,7 +15,7 @@ public class Product : BaseModel
         Price = price;
         Status = EntityStatus.Active;
     }
-
+    //TODO: Criar as demais actions desses metodos
     public void Inactive()
     { 
         Status = Enums.EntityStatus.Inactive;
