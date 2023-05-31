@@ -14,7 +14,7 @@ public class ProductReadRepository : IProductReadRepository
     {
         var products = await _productContext.Products.ToListAsync();
 
-        if (products.Any())
+        if (!products.Any())
             return Enumerable.Empty<Product>();
         
         return products;

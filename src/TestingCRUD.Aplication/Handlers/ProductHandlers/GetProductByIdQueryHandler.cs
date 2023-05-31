@@ -1,15 +1,15 @@
 ﻿using MediatR;
 
-using TestingCRUD.Infra.Repositories;
+using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Queries.ProductQueries;
 using TestingCRUD.Application.ViewModels.ProductViewModels;
 
 namespace TestingCRUD.Infra.QueryHandlers.ProductsQueryHandlers;
 public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductViewModel>
 {
-    private readonly ProductReadRepository _productReadRepository;
+    private readonly IProductReadRepository _productReadRepository;
 
-    public GetProductByIdQueryHandler(ProductReadRepository productReadRepository)
+    public GetProductByIdQueryHandler(IProductReadRepository productReadRepository)
     {
         _productReadRepository = productReadRepository;
     }

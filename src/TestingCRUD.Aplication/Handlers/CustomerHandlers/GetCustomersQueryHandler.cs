@@ -3,6 +3,7 @@
 using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
+using TestingCRUD.Application.ViewModels.ProductViewModels;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
 public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>
@@ -19,7 +20,7 @@ public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnum
         var customers = await _customerReadRepository.GetAll(cancellationToken);
 
         if (customers is null)
-            return null!;  //TODO: Mudar para um Ienumerable empty?
+            return Enumerable.Empty<CustomerViewModel>();
 
         var customersVM = customers.Select(customer => new CustomerViewModel
         {

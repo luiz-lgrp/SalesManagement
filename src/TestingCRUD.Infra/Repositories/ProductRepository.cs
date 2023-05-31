@@ -7,7 +7,7 @@ namespace TestingCRUD.Infra.Repositories;
 public class ProductRepository : IProductRepository
 {
     private readonly Context _context;
-    //TODO: VERIFIQUE SE A MIGRATION DE ESTÁ FUNCIONANDO, FOI FEITO UMA MUDANÇA NO CONTEXTO
+
     public ProductRepository(Context context) => _context = context;
 
     public async Task SaveChangesAsync()
