@@ -19,12 +19,18 @@ public class Customer : BaseModel
 
     public void Inactive()
     {
+        if (Status == EntityStatus.Inactive)
+            throw new ArgumentException("O Status já está inativo");
+
         Status = Enums.EntityStatus.Inactive;
         Updated = DateTime.Now;
     }
 
     public void Active()
     {
+        if (Status == EntityStatus.Active)
+            throw new ArgumentException("O Status já está ativo");
+
         Status = Enums.EntityStatus.Active;
         Updated = DateTime.Now;
     }

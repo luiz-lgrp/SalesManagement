@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.Commands.CustomerCommands;
 using TestingCRUD.Application.InputModels.CustomerInputModels;
+using System.Threading;
 
 namespace TestingCRUD.API.Controllers;
 
@@ -42,7 +43,7 @@ public class CustomersController : ControllerBase
         {
             var customer = await _mediator.Send(new CreateCustomerCommand(model));
 
-            return CreatedAtAction(nameof(GetByCpf), new { cpf = customer.Cpf }, null);
+            return CreatedAtAction(nameof(GetByCpf), new { cpf = customer.Cpf }, customer);
         }
         catch (ValidationException ex)
         {
@@ -96,14 +97,20 @@ public class CustomersController : ControllerBase
     {
         var inactivateCustomer = await _mediator.Send(new InactivateCustomerCommand(cpf));
 
+        if (inactivateCustomer is false)
+            return NotFound("Cliente não encontrado");
+
         return Ok(inactivateCustomer);
     }
 
     [HttpPut("Activate")]
     public async Task<IActionResult> Activate([FromQuery] string cpf)
     {
-        var inactivateCustomer = await _mediator.Send(new ActivateCustomerCommand(cpf));
+        var ActivateCustomer = await _mediator.Send(new ActivateCustomerCommand(cpf));
 
-        return Ok(inactivateCustomer);
+        if (ActivateCustomer is false)
+            return NotFound("Cliente não encontrado");
+
+        return Ok(ActivateCustomer);
     }
 }

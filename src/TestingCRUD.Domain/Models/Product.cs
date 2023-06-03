@@ -15,15 +15,21 @@ public class Product : BaseModel
         Price = price;
         Status = EntityStatus.Active;
     }
-    //TODO: Criar as demais actions desses metodos
+
     public void Inactive()
-    { 
+    {
+        if (Status == EntityStatus.Inactive)
+            throw new ArgumentException("O Status já está Inativo");
+
         Status = Enums.EntityStatus.Inactive;
         Updated = DateTime.Now;
     }
 
     public void Active()
     {
+        if (Status == EntityStatus.Active)
+            throw new ArgumentException("O Status já está ativo");
+
         Status = Enums.EntityStatus.Active;
         Updated = DateTime.Now;
     }
@@ -33,7 +39,7 @@ public class Product : BaseModel
     public void DecrementStock(int quantity)
     {
         if (quantity <= 0)
-            throw new ArgumentException("Quantidade inválida");
+            throw new ArgumentException("A quantidade a ser decrementada em estoque deve ser maior que zero");
         if (!HaveStock(quantity))
             throw new ArgumentException("Quantidade em estoque insuficiente");
 
@@ -44,7 +50,7 @@ public class Product : BaseModel
     public void IncreaseStock(int quantity) 
     {
         if (quantity <= 0) 
-            throw new ArgumentException("Quantidade inválida");
+            throw new ArgumentException("A quantidade a ser Incrementada em estoque deve ser maior que zero");
 
         Stock += quantity;
         Updated = DateTime.Now;
@@ -54,6 +60,8 @@ public class Product : BaseModel
     {
         if (Price <= 0) 
             throw new ArgumentException("O preço deve ser maior que zero");
+        if (Price == price)
+            throw new ArgumentException($"O valor do produto já é {price}");
 
         Price = price;
         Updated = DateTime.Now;
