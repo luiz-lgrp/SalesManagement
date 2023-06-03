@@ -21,7 +21,7 @@ public class Order : BaseModel
 
         //ValidateCustomer(cpf);
     }
-
+    //TODO: Criar e entender os metodos de Order e OrderItem
     private string GenerateOrderCode()
     {
         char letter = (char)random.Next('A', 'Z' + 1);
@@ -31,7 +31,7 @@ public class Order : BaseModel
 
     public void ValidateCustomer(string cpf)
     {
-        //TODO: Método precisa checar se o Cpf foi cadastrado e se o cliente está Ativo (Sem acoplamente com camda Infra)
+        //TODO: Método precisa checar se o Cpf foi cadastrado e se o cliente está Ativo (Sem acoplamente com camada Infra)
     }
 
     public void CalculateTotalAmount() => TotalValue = _orderItems.Sum(orderItem => orderItem.CalculateValue());

@@ -46,6 +46,11 @@ builder.Services.AddScoped<IRequestHandler<GetAllProductsQuery, IEnumerable<Prod
 builder.Services.AddScoped<IRequestHandler<GetProductByIdQuery, ProductViewModel>, GetProductByIdQueryHandler>();
 builder.Services.AddScoped<IRequestHandler<CreateProductCommand, ProductViewModel>, CreateProductCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<RemoveProductCommand, bool>, RemoveProductCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<InactivateProductCommand, bool>, InactivateProductCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<ActivateProductCommand, bool>, ActivateProductCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<IncreaseStockCommand, bool>, IncreaseStockCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<DecrementStockCommand, bool>, DecrementStockCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<ChangePriceCommand, bool>, ChangePriceCommandHandler>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();

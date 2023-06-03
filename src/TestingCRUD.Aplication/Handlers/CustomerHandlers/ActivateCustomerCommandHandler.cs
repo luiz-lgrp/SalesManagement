@@ -1,5 +1,6 @@
 ﻿using MediatR;
 
+using TestingCRUD.Domain.Enums;
 using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Commands.CustomerCommands;
 

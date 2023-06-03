@@ -27,7 +27,7 @@ public class CustomerReadRepository : ICustomerReadRepository
     {
         var customer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
 
-        if (customer == null) 
+        if (customer is null) 
             return null;
 
         return customer;

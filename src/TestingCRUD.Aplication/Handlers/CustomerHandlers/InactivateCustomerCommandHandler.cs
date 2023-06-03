@@ -1,5 +1,6 @@
 ﻿using MediatR;
 
+using TestingCRUD.Domain.Enums;
 using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Commands.CustomerCommands;
 
@@ -23,7 +24,7 @@ public class InactivateCustomerCommandHandler : IRequestHandler<InactivateCustom
 
         var customer = await _customerReadRepository.GetByCpf(cpfCustomer, cancellationToken);
 
-        if (customer is null)
+        if (customer is null )
             return false;
 
         customer.Inactive();
