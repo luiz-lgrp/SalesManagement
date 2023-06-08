@@ -1,4 +1,4 @@
-﻿namespace TestingCRUD.Application.InputModels.CustomerInputModels;
+﻿namespace TestingCRUD.Application.InputModels;
 public class CustomerInputModel
 {
     public string Name { get; set; }

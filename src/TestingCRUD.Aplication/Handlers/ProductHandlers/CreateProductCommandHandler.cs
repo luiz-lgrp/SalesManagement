@@ -21,7 +21,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     public async Task<ProductViewModel> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var createModel = request.ProductModel;
-
+        //Resolver o problema do Async no Validate
         var validationResult = new CreateProductValidator().Validate(createModel);
         
         if (!validationResult.IsValid)

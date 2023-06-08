@@ -1,5 +1,4 @@
 ﻿using MediatR;
-
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
 namespace TestingCRUD.Application.Queries.CustomerQueries;

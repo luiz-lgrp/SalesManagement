@@ -15,7 +15,7 @@ public class CustomerReadRepository : ICustomerReadRepository
 
     public async Task<IEnumerable<Customer>> GetAll(CancellationToken cancellationToken)
     {
-        var customers = await _customerContext.Customers.ToListAsync();
+        var customers = await _customerContext.Customers.ToListAsync(cancellationToken);
 
         if (!customers.Any())
             return Enumerable.Empty<Customer>();
@@ -25,7 +25,7 @@ public class CustomerReadRepository : ICustomerReadRepository
 
     public async Task<Customer?> GetByCpf(string cpf, CancellationToken cancellationToken)
     {
-        var customer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
+        var customer = await _customerContext.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf, cancellationToken);
 
         if (customer is null) 
             return null;

@@ -1,16 +1,22 @@
 ﻿using FluentValidation;
 
-using TestingCRUD.Application.InputModels.ProductInputModels;
+using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Application.InputModels;
 
 namespace TestingCRUD.Application.Validations.ProductCommandValidation;
 public class CreateProductValidator : AbstractValidator<ProductInputModel>
 {
+    private IProductReadRepository? _productReadRepository;
+
     public CreateProductValidator()
     {
         RuleFor(p => p.ProductName)
             .NotEmpty().WithMessage("Digite o nome do produto")
             .MaximumLength(20).WithMessage("O campo nome não pode passar de 20 caracteres")
             .MinimumLength(3).WithMessage("O campo nome não pode ser menor que 03 caracteres");
+        
+        RuleFor(p => p.ProductName)
+            .MustAsync(NameIsValid).WithMessage("Já existe um produto com este nome");
 
         RuleFor(p => p.Stock)
             .NotEmpty().WithMessage("Digite a quantidade em estoque")
@@ -23,5 +29,12 @@ public class CreateProductValidator : AbstractValidator<ProductInputModel>
 
     }
 
-    private bool IsInteger(int value) => value % 1 == 0;  
+    private bool IsInteger(int value) => value % 1 == 0;
+
+    private async Task<bool> NameIsValid(string productName, CancellationToken cancellationToken)
+    {
+        var product = await _productReadRepository.GetByName(productName, cancellationToken);
+
+        return product is null;
+    }
 }

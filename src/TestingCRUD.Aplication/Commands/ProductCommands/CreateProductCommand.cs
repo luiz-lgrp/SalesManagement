@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-using TestingCRUD.Application.InputModels.ProductInputModels;
+using TestingCRUD.Application.InputModels;
 using TestingCRUD.Application.ViewModels.ProductViewModels;
 
 namespace TestingCRUD.Application.Commands.ProductCommands;
