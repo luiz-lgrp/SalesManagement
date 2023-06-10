@@ -24,6 +24,7 @@ public class ChangePriceCommandHandler : IRequestHandler<ChangePriceCommand, boo
         if (product is null)
             return false;
         
+
         product.ChangePrice(request.Price);
 
         await _productRepository.SaveChangesAsync();
