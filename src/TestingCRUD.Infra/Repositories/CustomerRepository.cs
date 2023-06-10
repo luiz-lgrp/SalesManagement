@@ -26,14 +26,14 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<bool> DeleteAsync(string cpf, CancellationToken cancellationToken)
     {
-        var customerDelete = await _context.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf);
+        var customerDelete = await _context.Customers.FirstOrDefaultAsync(c => c.Cpf == cpf, cancellationToken);
 
         if (customerDelete is null)
             return false;
 
         _context.Customers.Remove(customerDelete);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return true;
     }

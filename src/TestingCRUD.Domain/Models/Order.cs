@@ -18,20 +18,13 @@ public class Order : BaseModel
         OrderCode = GenerateOrderCode();
         Status = OrderStatus.New;
         _orderItems = new List<OrderItem>();
-
-        //ValidateCustomer(cpf);
     }
-    //TODO: Criar e entender os metodos de Order e OrderItem
+
     private string GenerateOrderCode()
     {
         char letter = (char)random.Next('A', 'Z' + 1);
         int number = random.Next(10, 100);
         return $"{letter}{number}";
-    }
-
-    public void ValidateCustomer(string cpf)
-    {
-        //TODO: Método precisa checar se o Cpf foi cadastrado e se o cliente está Ativo (Sem acoplamente com camada Infra)
     }
 
     public void CalculateTotalAmount() => TotalValue = _orderItems.Sum(orderItem => orderItem.CalculateValue());
@@ -69,10 +62,9 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-
+    //Fazer a actions de Atualizar quantidade do item no pedido
     public void UpdateQuantityItem(OrderItem item, int newQuantity)
     {
-        //TODO: Teria um jeito melhor para não estourar uma exception? Try catch/ middleware de exceçao
         if (ExistOrderItem(item) is var itemFound && itemFound is null)
             throw new Exception("Item não encontrado, item inválido");
 
@@ -80,7 +72,7 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-
+    //Fazer a actions de remover item do pedido
     public void RemoveItem(OrderItem item)
     {
         if (ExistOrderItem(item) is var itemFound && itemFound is null)

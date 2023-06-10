@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-using TestingCRUD.Application.InputModels.CustomerInputModels;
+using TestingCRUD.Application.InputModels;
 
 namespace TestingCRUD.Application.Commands.CustomerCommands;
 public class UpdateCustomerCommand : IRequest<bool>

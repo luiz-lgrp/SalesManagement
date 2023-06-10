@@ -3,25 +3,28 @@ using FluentValidation;
 
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Application.InputModels;
 using TestingCRUD.Application.Commands.CustomerCommands;
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
-using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerViewModel>
 {
     private readonly ICustomerRepository _customerRepository;
+    private readonly IValidator<CustomerInputModel> _validator;
 
-    public CreateCustomerCommandHandler(ICustomerRepository customerRepository)
+    public CreateCustomerCommandHandler(ICustomerRepository customerRepository, 
+        IValidator<CustomerInputModel> validator)
     {
         _customerRepository = customerRepository;
+        _validator = validator;
     }
 
     public async Task<CustomerViewModel> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var createModel = request.CreateCustomer;
 
-        var validationResult = new CreateCustomerValidator().Validate(createModel);
+        var validationResult = await _validator.ValidateAsync(createModel);
 
         if (!validationResult.IsValid)
         {

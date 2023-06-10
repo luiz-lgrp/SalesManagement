@@ -3,7 +3,6 @@
 using TestingCRUD.Domain.Repositories;
 using TestingCRUD.Application.Queries.CustomerQueries;
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
-using TestingCRUD.Application.ViewModels.ProductViewModels;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
 public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>

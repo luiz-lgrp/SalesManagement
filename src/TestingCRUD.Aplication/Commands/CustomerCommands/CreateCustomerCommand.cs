@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
+using TestingCRUD.Application.InputModels;
 using TestingCRUD.Application.ViewModels.CustomerViewModels;
-using TestingCRUD.Application.InputModels.CustomerInputModels;
 
 namespace TestingCRUD.Application.Commands.CustomerCommands;
 public class CreateCustomerCommand : IRequest<CustomerViewModel>

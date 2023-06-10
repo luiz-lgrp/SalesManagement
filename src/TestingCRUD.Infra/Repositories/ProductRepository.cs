@@ -25,16 +25,15 @@ public class ProductRepository : IProductRepository
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var productDelete = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        var productDelete = await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         
         if (productDelete is null)
             return false;
 
         _context.Products.Remove(productDelete);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return true;
     }
-
 }

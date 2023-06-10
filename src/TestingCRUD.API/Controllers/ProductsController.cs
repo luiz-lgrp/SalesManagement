@@ -2,10 +2,9 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
+using TestingCRUD.Application.InputModels;
 using TestingCRUD.Application.Queries.ProductQueries;
 using TestingCRUD.Application.Commands.ProductCommands;
-using TestingCRUD.Application.InputModels.ProductInputModels;
-using TestingCRUD.Application.Commands.CustomerCommands;
 
 namespace TestingCRUD.API.Controllers;
 
@@ -40,7 +39,7 @@ public class ProductsController : ControllerBase
         {
             var product = await _mediator.Send(new CreateProductCommand(model));
 
-            return CreatedAtAction(nameof(GetById), new { id = product.Id }, null);
+            return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
         catch (ValidationException ex)
         {

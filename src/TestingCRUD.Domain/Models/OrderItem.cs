@@ -21,6 +21,6 @@ public class OrderItem : BaseModel
     public decimal CalculateValue() => UnitValue * Quantity;
 
     public void AddQuantity(int  quantity) => Quantity += quantity;
-
+    
     public void UpdateQuantity(int quantity) => Quantity = quantity;
 }

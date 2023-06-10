@@ -2,26 +2,31 @@
 using FluentValidation;
 
 using TestingCRUD.Domain.Repositories;
+using TestingCRUD.Application.InputModels;
 using TestingCRUD.Application.Commands.CustomerCommands;
-using TestingCRUD.Application.Validations.CustomerCommandValidation;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
 public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly ICustomerReadRepository _customerReadRepository;
+    private readonly IValidator<CustomerInputModel> _validator;
 
-    public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, ICustomerReadRepository customerReadRepository)
+    public UpdateCustomerCommandHandler(
+        ICustomerRepository customerRepository, 
+        ICustomerReadRepository customerReadRepository,
+        IValidator<CustomerInputModel> validator)
     {
         _customerRepository = customerRepository;
         _customerReadRepository = customerReadRepository;
+        _validator = validator;
     }
 
     public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
         var updateModel = request.UpdateCustomer;
 
-        var validationResult = new UpdateCustomerValidator().Validate(updateModel);
+        var validationResult = await _validator.ValidateAsync(updateModel);
 
         if (!validationResult.IsValid)
         {

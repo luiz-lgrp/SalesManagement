@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="InputModels\CustomerInputModels\**" />
+    <Compile Remove="InputModels\ProductInputModels\**" />
+    <EmbeddedResource Remove="InputModels\CustomerInputModels\**" />
+    <EmbeddedResource Remove="InputModels\ProductInputModels\**" />
+    <None Remove="InputModels\CustomerInputModels\**" />
+    <None Remove="InputModels\ProductInputModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Handlers\OrderHandlers\RemoveItemsCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Handlers\ProductHandlers\Class1.csActivateProductCommandHandler" />
   </ItemGroup>
 
