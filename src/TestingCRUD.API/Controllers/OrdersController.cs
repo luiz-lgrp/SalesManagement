@@ -17,7 +17,6 @@ public class OrdersController : ControllerBase
     public OrdersController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet("GetAll")]
-    //TODO: Vc colocou cancellation token nas operações, TESTAR
     public async Task<IActionResult> GetAll()
     {
         var ordersVM = await _mediator.Send(new GetOrdersQuery());
@@ -56,22 +55,37 @@ public class OrdersController : ControllerBase
             return BadRequest(new { message = "Ocorreram erros na validação", errors });
         }
     }
-    //TODO: Implementar o Remove Order
-    //[HttpDelete("{id}")]
-    //public IActionResult DeleteOrder(Guid id)
-    //{
-    //    // Procurar o pedido pelo ID no sistema
-    //    var order = _orderRepository.GetOrderById(id);
 
-    //    if (order == null)
-    //    {
-    //        return NotFound();
-    //    }
+    [HttpPut("ExchangeAwaitingPayment")]
+    public async Task<IActionResult> ExchangeStatusAwaitingPayment([FromQuery] Guid id)
+    {
+        var UpdatedStatus = await _mediator.Send(new ExchangeStatusAwaitingPaymentCommand(id));
 
-    //    // Excluir o pedido do sistema
-    //    _orderRepository.DeleteOrder(order);
+        if (UpdatedStatus is false)
+            return NotFound("Pedido não encontrado");
 
-    //    return NoContent();
-    //}
+        return Ok(UpdatedStatus);
+    }
 
+    [HttpPut("ExchangeStatusConclude")]
+    public async Task<IActionResult> ExchangeStatusConclude([FromQuery] Guid id)
+    {
+        var UpdatedStatus = await _mediator.Send(new ExchangeStatusConcludeCommand(id));
+
+        if (UpdatedStatus is false)
+            return NotFound("Pedido não encontrado");
+
+        return Ok(UpdatedStatus);
+    }
+
+    [HttpDelete("RemoveOrder")]
+    public async Task<IActionResult> RemoveOrder([FromQuery] Guid id)
+    {
+        var orderDeleted = await _mediator.Send(new RemoveOrderCommand(id));
+
+        if (orderDeleted is false)
+            return NotFound("Pedido não encontrado");
+
+        return Ok(orderDeleted);
+    }
 }

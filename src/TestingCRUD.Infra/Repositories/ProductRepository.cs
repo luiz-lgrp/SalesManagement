@@ -14,7 +14,7 @@ public class ProductRepository : IProductRepository
     {
         await _context.SaveChangesAsync();
     }
-    //TODO: Mudar a forma que fiz a validação de Cpf e Nome do produto igual (copior do Order)
+
     public async Task<Product> CreateAsync(Product product, CancellationToken cancellationToken)
     {
         await _context.Products.AddAsync(product, cancellationToken);

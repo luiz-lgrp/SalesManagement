@@ -6,10 +6,11 @@ using TestingCRUD.Application.InputModels;
 namespace TestingCRUD.Application.Validations.CustomerCommandValidation;
 public class CreateCustomerValidator : AbstractValidator<CustomerInputModel>
 {
-    private ICustomerReadRepository? _customerReadRepository;
-
-    public CreateCustomerValidator()
+    private readonly ICustomerReadRepository? _customerReadRepository;
+    public CreateCustomerValidator(ICustomerReadRepository customerReadRepository)
     {
+        _customerReadRepository = customerReadRepository;
+
         RuleFor(c => c.Name)
            .NotEmpty().WithMessage("Digite um nome")
            .MaximumLength(30).WithMessage("O campo nome não pode passar de 30 caracteres")

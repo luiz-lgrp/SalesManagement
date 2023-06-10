@@ -27,6 +27,9 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, IEnumerable
         {
             OrderId = order.Id,
             Cpf = order.Cpf,
+            OrderCode = order.OrderCode,
+            TotalValue = order.TotalValue,
+            Status = order.Status,
             Items = order.OrderItems.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId,

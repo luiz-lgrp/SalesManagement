@@ -16,14 +16,14 @@ public class ChangePriceCommandHandler : IRequestHandler<ChangePriceCommand, boo
         _productRepository = productRepository;
         _productReadRepository = productReadRepository;
     }
-
+    //TODO: Verificar esse handle, changePrice
     public async Task<bool> Handle(ChangePriceCommand request, CancellationToken cancellationToken)
     {
         var product = await _productReadRepository.GetById(request.ProductId, cancellationToken);
 
         if (product is null)
             return false;
-
+        
         product.ChangePrice(request.Price);
 
         await _productRepository.SaveChangesAsync();

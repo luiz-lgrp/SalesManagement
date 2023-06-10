@@ -62,10 +62,9 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-
+    //Fazer a actions de Atualizar quantidade do item no pedido
     public void UpdateQuantityItem(OrderItem item, int newQuantity)
     {
-        //TODO: Teria um jeito melhor para não estourar uma exception? Try catch/ middleware de exceçao
         if (ExistOrderItem(item) is var itemFound && itemFound is null)
             throw new Exception("Item não encontrado, item inválido");
 
@@ -73,7 +72,7 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-
+    //Fazer a actions de remover item do pedido
     public void RemoveItem(OrderItem item)
     {
         if (ExistOrderItem(item) is var itemFound && itemFound is null)

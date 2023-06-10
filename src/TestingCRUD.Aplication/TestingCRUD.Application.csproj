@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Handlers\OrderHandlers\RemoveItemsCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Handlers\ProductHandlers\Class1.csActivateProductCommandHandler" />
   </ItemGroup>
 

@@ -25,7 +25,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
         _validator = validator;
         _productReadRepository = productReadRepository;
     }
-    //TODO: cada quantidade de de produtos no pedido deve decrementar do estoque de Produtos
+
     public async Task<OrderViewModel> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var cpfCustomer = request.Order.Cpf;
@@ -43,18 +43,16 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
         var productIds = pedidoItems.Select(item => item.ProductId).ToList();
         var products = await _productReadRepository.GetProductsByIds(productIds, cancellationToken);
 
-        decimal productValue = 0;
-
         foreach (var itemDto in pedidoItems)
         {
             var product = products.FirstOrDefault(p => p.Id == itemDto.ProductId);
-            productValue = product.Price;
 
-            OrderItem item = new OrderItem(itemDto.ProductId, itemDto.ProductName, itemDto.Quantity, productValue);
+            product!.DecrementStock(itemDto.Quantity);
+
+            OrderItem item = new OrderItem(itemDto.ProductId, itemDto.ProductName, itemDto.Quantity, product.Price);
+            
             order.AddItemToOrder(item);
         }
-
-        order.CalculateTotalAmount();
 
         var createdOrder = await _orderRepository.CreateAsync(order, cancellationToken);
 
@@ -65,6 +63,9 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
         {
             OrderId = createdOrder.Id,
             Cpf = createdOrder.Cpf,
+            OrderCode = createdOrder.OrderCode,
+            TotalValue = createdOrder.TotalValue,
+            Status = createdOrder.Status,
             Items = createdOrder.OrderItems.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId,
