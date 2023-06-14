@@ -16,17 +16,20 @@ public class AddItemOnOrderCommandHandler : IRequestHandler<AddItemOnOrderComman
     private readonly IOrderReadRepository _orderReadRepository;
     private readonly IValidator<OrderItemInputModel> _validator;
     private readonly IProductReadRepository _productReadRepository;
+    private readonly IProductRepository _productRepository;
 
     public AddItemOnOrderCommandHandler(
         IOrderRepository orderRepository,
         IOrderReadRepository orderReadRepository,
         IValidator<OrderItemInputModel> validator,
-        IProductReadRepository productReadRepository)
+        IProductReadRepository productReadRepository,
+        IProductRepository productRepository)
     {
         _orderRepository = orderRepository;
         _orderReadRepository = orderReadRepository;
         _validator = validator;
         _productReadRepository = productReadRepository;
+        _productRepository = productRepository;
     }
     //TODO: Adicionar item deu ruim, verificar
     public async Task<OrderViewModel?> Handle(AddItemOnOrderCommand request, CancellationToken cancellationToken)
@@ -51,19 +54,18 @@ public class AddItemOnOrderCommandHandler : IRequestHandler<AddItemOnOrderComman
         if (product is null)
             return null;
 
-        if (!product.HaveStock(newItemModel.Quantity))
-            throw new ArgumentException("Quantidade em estoque insuficiente");
-
-
         var newItem = new OrderItem(
-            newItemModel.ProductId, 
-            newItemModel.ProductName, 
+            product.Id, 
+            product.ProductName, 
             newItemModel.Quantity, 
             product.Price);
+
+        product.DecrementStock(newItemModel.Quantity);
 
         order.AddItemToOrder(newItem);
 
         await _orderRepository.SaveChangesAsync();
+        await _productRepository.SaveChangesAsync();
 
         var orderVM = new OrderViewModel
         {
