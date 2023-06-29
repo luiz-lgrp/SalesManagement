@@ -31,7 +31,7 @@ public class AddItemOnOrderCommandHandler : IRequestHandler<AddItemOnOrderComman
         _productReadRepository = productReadRepository;
         _productRepository = productRepository;
     }
-    //TODO: Adicionar item deu ruim, verificar
+    //TODO: Adicionar item deu ruim, verificar | Tentei o Reload
     public async Task<OrderViewModel?> Handle(AddItemOnOrderCommand request, CancellationToken cancellationToken)
     {
         var orderId = request.OrderId;
@@ -55,17 +55,18 @@ public class AddItemOnOrderCommandHandler : IRequestHandler<AddItemOnOrderComman
             return null;
 
         var newItem = new OrderItem(
-            product.Id, 
-            product.ProductName, 
-            newItemModel.Quantity, 
+            product.Id,
+            product.ProductName,
+            newItemModel.Quantity,
             product.Price);
 
         product.DecrementStock(newItemModel.Quantity);
 
+        _orderRepository.Reload(order);
         order.AddItemToOrder(newItem);
 
-        await _orderRepository.SaveChangesAsync();
-        await _productRepository.SaveChangesAsync();
+         await _orderRepository.SaveChangesAsync();
+         await _productRepository.SaveChangesAsync();
 
         var orderVM = new OrderViewModel
         {

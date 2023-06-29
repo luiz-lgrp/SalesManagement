@@ -62,7 +62,7 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-    //Fazer a actions de Atualizar quantidade do item no pedido
+  
     public void UpdateQuantityItem(OrderItem item, int newQuantity)
     {
         if (ExistOrderItem(item) is var itemFound && itemFound is null)
@@ -72,7 +72,7 @@ public class Order : BaseModel
         CalculateTotalAmount();
         Updated = DateTime.Now;
     }
-    //Fazer a actions de remover item do pedido
+    
     public void RemoveItem(OrderItem item)
     {
         if (ExistOrderItem(item) is var itemFound && itemFound is null)
