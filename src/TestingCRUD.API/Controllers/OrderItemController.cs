@@ -27,7 +27,7 @@ public class OrderItemController : ControllerBase
             var updateOrder = await _mediator.Send(new AddItemOnOrderCommand(orderId, newItem));
 
             if (updateOrder is null)
-                return NotFound("O pedido ou produto não foi encontrado");
+                return NotFound("O Item não foi inserido no pedido");
 
             return Ok(updateOrder);
         }
