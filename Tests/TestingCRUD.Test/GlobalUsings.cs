@@ -1,5 +1,6 @@
 global using Moq;
 global using Xunit;
+global using Shouldly;
 global using ValidationException = FluentValidation.ValidationException;
 
 global using TestingCRUD.Domain.Enums;

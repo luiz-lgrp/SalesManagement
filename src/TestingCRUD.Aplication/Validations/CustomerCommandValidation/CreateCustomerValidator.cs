@@ -21,7 +21,7 @@ public class CreateCustomerValidator : AbstractValidator<CustomerInputModel>
             .NotEmpty().WithMessage("Digite o seu Cpf")
             .MaximumLength(11).WithMessage("O campo Cpf não pode passar de 11 caracteres")
             .Matches("[0-9]{11}").WithMessage("Cpf inválido com pontos,traços ou letras")
-            .MustAsync(CpfIsValid).WithMessage($"Este CPF já está cadastrado");
+            .MustAsync(CpfIsValid).WithMessage("Este Cpf já está cadastrado");
 
         RuleFor(c => c.Email)
             .NotEmpty().WithMessage("Digite um email")
