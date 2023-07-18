@@ -2,8 +2,8 @@
 
 public class CreateCustomerCommandHandlerTest
 {
-    private Mock<ICustomerRepository> _customerRepositoryMock;
-    private Mock<ICustomerReadRepository> _customerReadRepositoryMock;
+    private  Mock<ICustomerRepository> _customerRepositoryMock;
+    private  Mock<ICustomerReadRepository> _customerReadRepositoryMock;
 
     public CreateCustomerCommandHandlerTest()
     {
