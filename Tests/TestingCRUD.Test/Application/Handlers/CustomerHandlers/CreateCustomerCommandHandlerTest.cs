@@ -40,7 +40,7 @@ public class CreateCustomerCommandHandlerTest
 
         _customerReadRepositoryMock
             .Setup(x => x.GetByCpf(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string cpf, CancellationToken cancellationToken) => null);
+            .ReturnsAsync((string cpf) => null);
 
         var validator = new CreateCustomerValidator(_customerReadRepositoryMock.Object);
 
