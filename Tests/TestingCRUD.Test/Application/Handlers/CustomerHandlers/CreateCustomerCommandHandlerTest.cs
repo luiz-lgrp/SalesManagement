@@ -27,7 +27,7 @@ public class CreateCustomerCommandHandlerTest
 
         _customerRepositoryMock
             .Setup(x => x.CreateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((Customer customer, CancellationToken cancellationToken) =>
+            .ReturnsAsync((Customer customer) =>
             {
                 var createdCustomer = new Customer(
                     customerInputModel.Name,
