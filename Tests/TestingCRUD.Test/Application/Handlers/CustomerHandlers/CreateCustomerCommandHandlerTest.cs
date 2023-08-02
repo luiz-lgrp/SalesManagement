@@ -27,7 +27,7 @@ public class CreateCustomerCommandHandlerTest
 
         _customerRepositoryMock
             .Setup(x => x.CreateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((Customer customer) =>
+            .ReturnsAsync((Customer customer, CancellationToken cancellationToken) =>
             {
                 var createdCustomer = new Customer(
                     customerInputModel.Name,
@@ -40,7 +40,7 @@ public class CreateCustomerCommandHandlerTest
 
         _customerReadRepositoryMock
             .Setup(x => x.GetByCpf(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string cpf) => null);
+            .ReturnsAsync((string cpf, CancellationToken cancellationToken) => null);
 
         var validator = new CreateCustomerValidator(_customerReadRepositoryMock.Object);
 
@@ -139,7 +139,7 @@ public class CreateCustomerCommandHandlerTest
 
         _customerReadRepositoryMock
             .Setup(x => x.GetByCpf(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((string cpf, CancellationToken cancellationToken) => 
+            .ReturnsAsync((string cpf, CancellationToken cancellationToken) =>
             {
                 var CustomerMock = new Customer(
                     customerInputModel.Name,
