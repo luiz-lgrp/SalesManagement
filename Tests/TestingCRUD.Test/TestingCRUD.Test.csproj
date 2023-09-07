@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Handlers\ProductHandlers\" />
     <Folder Include="Application\Handlers\OrderitemHandlers\" />
     <Folder Include="Application\Handlers\OrderHandlers\" />
     <Folder Include="Domain\Models\" />

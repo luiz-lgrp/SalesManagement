@@ -21,13 +21,11 @@ public class CreateProductValidator : AbstractValidator<ProductInputModel>
             .MustAsync(NameIsValid).WithMessage("Já existe um produto com este nome");
 
         RuleFor(p => p.Stock)
-            .NotEmpty().WithMessage("Digite a quantidade em estoque")
             .GreaterThan(0).WithMessage("O valor em estoque deve ser maior que zero")
             .Must(IsInteger).WithMessage("O valor em estoque deve ser um número inteiro");
 
         RuleFor(p => p.Price)
-            .NotEmpty().WithMessage("Digite o valor do produto")
-            .GreaterThan(0).WithMessage("O valor em estoque deve ser maior que zero");
+            .GreaterThan(0).WithMessage("O preço do produto deve ser maior que zero");
     }
 
     private bool IsInteger(int value) => value % 1 == 0;

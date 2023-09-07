@@ -1,4 +1,7 @@
-﻿namespace TestingCRUD.Test.Application.Handlers.CustomerHandlers;
+﻿using Moq;
+using TestingCRUD.Application.Validations.ProductCommandValidation;
+
+namespace TestingCRUD.Test.Application.Handlers.CustomerHandlers;
 
 public class CreateCustomerCommandHandlerTest
 {
@@ -65,6 +68,44 @@ public class CreateCustomerCommandHandlerTest
         //Assert.Equal(customerInputModel.Email, result.Email);
         //Assert.Equal(customerInputModel.Phone, result.Phone);
         //Assert.Equal(EntityStatus.Active, result.Status);
+    }
+
+    [Fact]
+    public async Task Handle_ValidCommand_CustomerIsSavedInRepository()
+    {
+        // Arrange
+        var customerInputModel = new CustomerInputModel
+        {
+            Name = "John Doe",
+            Cpf = "14612697761",
+            Email = "johndoe@example.com",
+            Phone = "99-99999-9999"
+        };
+
+        var createCustomerCommand = new CreateCustomerCommand(customerInputModel);
+
+        _customerReadRepositoryMock
+            .Setup(x => x.GetByCpf(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((string cpf, CancellationToken cancellationToken) => null);
+
+        _customerRepositoryMock
+            .Setup(x => x.CreateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((Customer customer, CancellationToken cancellationToken) => customer);
+
+        var validator = new CreateCustomerValidator(_customerReadRepositoryMock.Object);
+
+        var handler = new CreateCustomerCommandHandler(_customerRepositoryMock.Object, validator);
+
+        // Act
+        var result = await handler.Handle(createCustomerCommand, CancellationToken.None);
+
+        // Assert
+        _customerRepositoryMock.Verify(repo => repo.CreateAsync(It.Is<Customer>(
+            c => c.Name == customerInputModel.Name
+            && c.Cpf == customerInputModel.Cpf
+            && c.Email == customerInputModel.Email
+            && c.Phone == customerInputModel.Phone
+            && c.Status == EntityStatus.Active), CancellationToken.None), Times.Once());
     }
 
     [Fact]
