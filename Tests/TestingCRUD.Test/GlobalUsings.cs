@@ -11,3 +11,5 @@ global using TestingCRUD.Application.Handlers.CustomerHandlers;
 global using TestingCRUD.Application.Commands.CustomerCommands;
 global using TestingCRUD.Application.ViewModels.CustomerViewModels;
 global using TestingCRUD.Application.Validations.CustomerCommandValidation;
+global using TestingCRUD.Application.Commands.ProductCommands;
+global using TestingCRUD.Application.Handlers.ProductHandlers;
