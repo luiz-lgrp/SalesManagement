@@ -1,7 +1,4 @@
-﻿using TestingCRUD.Application.Validations.ProductCommandValidation;
-using TestingCRUD.Application.ViewModels.ProductViewModels;
-
-namespace TestingCRUD.Test.Application.Handlers.ProductHandlers;
+﻿namespace TestingCRUD.Test.Application.Handlers.ProductHandlers;
 
 public class CreateProductCommandHandlerTest
 {
@@ -351,6 +348,4 @@ public class CreateProductCommandHandlerTest
         var exception = await Should.ThrowAsync<ValidationException>(() => handler.Handle(createProductCommand, CancellationToken.None));
         exception.Message.ShouldContain("O preço do produto deve ser maior que zero");
     }
-
-
 }
