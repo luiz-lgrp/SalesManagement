@@ -58,9 +58,9 @@ public class Product : BaseModel
 
     public void ChangePrice(decimal price)
     {
-        if (Price <= 0) 
+        if (price <= 0) 
             throw new ArgumentException("O preço deve ser maior que zero");
-        if (Price == price)
+        if (price == Price)
             throw new ArgumentException($"O valor do produto já é {price}");
 
         Price = price;
