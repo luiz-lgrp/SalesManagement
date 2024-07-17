@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<RootNamespace>TestingCRUD.Aplication</RootNamespace>
+	<AssemblyName>TestingCRUD.Aplication</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestingCRUD.Domain\TestingCRUD.Domain.csproj" />
+    <ProjectReference Include="..\TestingCRUD.Domain\SalesManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
