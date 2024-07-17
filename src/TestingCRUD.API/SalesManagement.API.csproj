@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>f6d5fcec-6d9a-4436-b3a5-288999234a7e</UserSecretsId>
+	<RootNamespace>TestingCRUD.API</RootNamespace>
+	<AssemblyName>TestingCRUD.API</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestingCRUD.Aplication\TestingCRUD.Application.csproj" />
+    <ProjectReference Include="..\TestingCRUD.Aplication\SalesManagement.Application.csproj" />
     <!--<ProjectReference Include="..\TestingCRUD.Domain\TestingCRUD.Domain.csproj" />-->
-    <ProjectReference Include="..\TestingCRUD.Infra\TestingCRUD.Infra.csproj" />
+    <ProjectReference Include="..\TestingCRUD.Infra\SalesManagement.Infra.csproj" />
   </ItemGroup>
 
 </Project>
