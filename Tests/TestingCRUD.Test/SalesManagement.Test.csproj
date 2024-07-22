@@ -27,8 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Handlers\OrderitemHandlers\" />
-    <Folder Include="Application\Handlers\OrderHandlers\" />
     <Folder Include="Domain\Models\" />
   </ItemGroup>
 
