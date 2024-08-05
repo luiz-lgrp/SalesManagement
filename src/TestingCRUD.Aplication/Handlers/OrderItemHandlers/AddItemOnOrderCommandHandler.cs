@@ -35,65 +35,57 @@ public class AddItemOnOrderCommandHandler : IRequestHandler<AddItemOnOrderComman
     //TODO: Adicionar item deu ruim, verificar 
     public async Task<OrderViewModel?> Handle(AddItemOnOrderCommand request, CancellationToken cancellationToken)
     {
-        try
+        var orderId = request.OrderId;
+        var newItemModel = request.NewItem;
+
+        var validationResult = await _validator.ValidateAsync(newItemModel);
+
+        if (!validationResult.IsValid)
         {
-            var orderId = request.OrderId;
-            var newItemModel = request.NewItem;
-
-            var validationResult = await _validator.ValidateAsync(newItemModel);
-
-            if (!validationResult.IsValid)
-            {
-                throw new ValidationException(validationResult.Errors);
-            }
-
-            var order = await _orderReadRepository.GetById(orderId, cancellationToken);
-
-            if (order is null)
-                return null;
-
-            var product = await _productReadRepository.GetById(newItemModel.ProductId, cancellationToken);
-
-            if (product is null)
-                return null;
-
-            var newItem = new OrderItem(
-                product.Id,
-                product.ProductName,
-                newItemModel.Quantity,
-                product.Price);
-
-            order.AddItemToOrder(newItem);
-            await _orderRepository.SaveChangesAsync();
-
-            //Depois de funcionar, mudar para o bloco acima
-            product.DecrementStock(newItemModel.Quantity);
-            await _productRepository.SaveChangesAsync();
-
-
-            var orderVM = new OrderViewModel
-            {
-                OrderId = order.Id,
-                Cpf = order.Cpf,
-                OrderCode = order.OrderCode,
-                TotalValue = order.TotalValue,
-                Status = order.Status,
-                Items = order.OrderItems.Select(item => new OrderItemDto
-                {
-                    ProductId = item.ProductId,
-                    ProductName = item.ProductName,
-                    Quantity = item.Quantity,
-                    UnitValue = item.UnitValue
-                }).ToList(),
-            };
-
-            return orderVM;
-        }
-        catch (Exception e)
-        {
-
+            throw new ValidationException(validationResult.Errors);
         }
 
-        return null;
+        var order = await _orderReadRepository.GetById(orderId, cancellationToken);
+
+        if (order is null)
+            return null;
+
+        var product = await _productReadRepository.GetById(newItemModel.ProductId, cancellationToken);
+
+        if (product is null)
+            return null;
+
+        var newItem = new OrderItem(
+            product.Id,
+            product.ProductName,
+            newItemModel.Quantity,
+            product.Price);
+
+        order.AddItemToOrder(newItem);
+        await _orderRepository.SaveChangesAsync();
+
+        //Depois de funcionar, mudar para o bloco acima
+        product.DecrementStock(newItemModel.Quantity);
+        await _productRepository.SaveChangesAsync();
+
+
+        var orderVM = new OrderViewModel
+        {
+            OrderId = order.Id,
+            Cpf = order.Cpf,
+            OrderCode = order.OrderCode,
+            TotalValue = order.TotalValue,
+            Status = order.Status,
+            Items = order.OrderItems.Select(item => new OrderItemDto
+            {
+                ProductId = item.ProductId,
+                ProductName = item.ProductName,
+                Quantity = item.Quantity,
+                UnitValue = item.UnitValue
+            }).ToList(),
+        };
+
+        return orderVM;
+
     }
 }
