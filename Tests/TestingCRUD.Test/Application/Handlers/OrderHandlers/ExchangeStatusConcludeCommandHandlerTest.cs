@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestingCRUD.Application.Commands.OrderCommands;
-using TestingCRUD.Application.Handlers.OrderHandlers;
-
-namespace TestingCRUD.Test.Application.Handlers.OrderHandlers
+﻿namespace TestingCRUD.Test.Application.Handlers.OrderHandlers
 {
     public class ExchangeStatusConcludeCommandHandlerTest
     {

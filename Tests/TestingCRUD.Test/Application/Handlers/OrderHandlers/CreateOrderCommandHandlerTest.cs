@@ -1,11 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using TestingCRUD.Application.Commands.OrderCommands;
-using TestingCRUD.Application.Handlers.OrderHandlers;
-using TestingCRUD.Application.Validations.OrderCommandValidation;
-using TestingCRUD.Application.ViewModels;
-
-namespace TestingCRUD.Test.Application.Handlers.OrderHandlers
+﻿namespace TestingCRUD.Test.Application.Handlers.OrderHandlers
 {
     public class CreateOrderCommandHandlerTest
     {
