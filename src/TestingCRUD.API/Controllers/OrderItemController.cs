@@ -19,30 +19,6 @@ public class OrderItemController : ControllerBase
     public OrderItemController(IMediator mediator) => _mediator = mediator;
 
 
-    [HttpPut("AddItemOnOrder")]
-    public async Task<IActionResult> AddItemOnOrder([FromQuery] Guid orderId, [FromBody] OrderItemInputModel newItem)
-    {
-        try
-        {
-            var updateOrder = await _mediator.Send(new AddItemOnOrderCommand(orderId, newItem));
-
-            if (updateOrder is null)
-                return NotFound("O Item não foi inserido no pedido");
-
-            return Ok(updateOrder);
-        }
-        catch (ValidationException ex)
-        {
-            var errors = ex.Errors.Select(e => new
-            {
-                e.PropertyName,
-                e.ErrorMessage
-            });
-
-            return BadRequest(new { message = "Ocorreram erros na validação", errors });
-        }
-    }
-
     [HttpPut("UpdateQuantityItem")]
     public async Task<IActionResult> UpdateQuantityItem([FromQuery] Guid orderId, [FromBody] ChangeQuantityItemDTO model)
     {
