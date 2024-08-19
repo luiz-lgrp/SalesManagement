@@ -37,8 +37,4 @@ public class OrderRepository : IOrderRepository
         return true;
     }
 
-    public void Reload<TEntity>(TEntity entity) where TEntity : class
-    {
-        _context.Entry(entity).Reload();
-    }
 }

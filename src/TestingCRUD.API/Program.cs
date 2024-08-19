@@ -66,7 +66,6 @@ builder.Services.AddScoped<IRequestHandler<ExchangeStatusAwaitingPaymentCommand,
 builder.Services.AddScoped<IRequestHandler<ExchangeStatusConcludeCommand, bool>, ExchangeStatusConcludeCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<RemoveOrderCommand, bool>, RemoveOrderCommandHandler>();
 
-builder.Services.AddScoped<IRequestHandler<AddItemOnOrderCommand, OrderViewModel>, AddItemOnOrderCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<UpdateQuantityItemCommand, bool>, UpdateQuantityItemCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<RemoveItemCommand, bool>, RemoveItemCommandHandler>();
 
