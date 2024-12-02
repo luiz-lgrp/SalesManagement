@@ -3,7 +3,7 @@
 # SalesManagement
 
 ## Sobre
-O projeto é um programa de gerenciamento de vendas feito para aplicar o que tenho aprendido sobre testes unitários, aproveitei e apliquei CQRS + Mediatr, Conceitos do SOLID e DDD...
+SalesManagement é um sistema desenvolvido para a gestão de vendas, com foco na escalabilidade, organização e aplicação de boas práticas de engenharia de software. O projeto foi idealizado para criar um ambiente robusto que atenda a requisitos comuns de sistemas de gerenciamento, como controle de produtos, clientes e pedidos, com um backend modular e altamente testável.
 <br>
 
   
