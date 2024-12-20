@@ -40,7 +40,6 @@ builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.AddValidatorsFromAssembly(typeof(UpdateCustomerValidator).Assembly);
 
-//TODO: Criar uma extensão para configurar esses serviços
 builder.Services.AddScoped<IRequestHandler<GetCustomersQuery, IEnumerable<CustomerViewModel>>, GetCustomersQueryHandler>();
 builder.Services.AddScoped<IRequestHandler<GetCustomerByCpfQuery, CustomerViewModel>, GetCustomerByCpfQueryHandler>();
 builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, CustomerViewModel>, CreateCustomerCommandHandler>();
