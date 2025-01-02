@@ -10,12 +10,16 @@ Este projeto foi criado por mim para aprendizado prático e implementação de c
 
 - **ASP.NET Core 6**
 - **xUnit** para testes unitários.
+- **Clean Architecture** e **Domain-Driven Design (DDD)**.
+- **Princípios SOLID** para um design de software robusto.
+- **CQRS**.
+- **Repository Pattern**.
+- **Docker**.
 - **SQL Server** como banco de dados.
 - **Mediatr** para a aplicação de CQRS.
 - **Dependency Injection** para melhorar modularidade e testabilidade.
 - **FluentValidation** para validação de regras de negócios.
-- **Clean Architecture** e **Domain-Driven Design (DDD)**.
-- **Princípios SOLID** para um design de software robusto.
+
 
 ---
 
