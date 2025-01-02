@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: sales-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sales-sqlserver;Database=SalesManagement;User=sa;Password=SalesManagement123;
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    container_name: sales-sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: SalesManagement123
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+
+volumes:
+  sqlserverdata:
