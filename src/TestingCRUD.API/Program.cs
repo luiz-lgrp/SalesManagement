@@ -87,7 +87,6 @@ using (var scope = app.Services.CreateScope())
     InitializeDB.Initialize(context);
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
