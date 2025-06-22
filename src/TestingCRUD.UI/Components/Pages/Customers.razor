@@ -1,0 +1,162 @@
+﻿@page "/customers"
+@rendermode InteractiveServer
+
+@using MediatR
+@using TestingCRUD.Aplication.InputModels
+@using TestingCRUD.Aplication.Shared
+@using TestingCRUD.Application.ViewModels.CustomerViewModels
+@using TestingCRUD.Application.InputModels
+@using TestingCRUD.Application.Commands.CustomerCommands
+@using System.Collections.Generic
+@using Application.Queries.CustomerQueries;
+@using TestingCRUD.UI.Components.Forms
+
+@inject IMediator Mediator
+@inject MudBlazor.IDialogService DialogService
+@inject MudBlazor.ISnackbar Snackbar
+
+
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudStack Spacing="2" Class="mb-4">
+    <MudButton StartIcon="@Icons.Material.Filled.PersonAdd"
+               Variant="Variant.Outlined"
+               Color="Color.Success"
+               Size="Size.Large"
+               OnClick="ShowAddCustomer">
+        NOVO CLIENTE
+    </MudButton>
+</MudStack>
+
+<MudPaper>
+    <MudTable Items="@customers" Hover="true">
+        <HeaderContent>
+            <MudTh>Nome</MudTh>
+            <MudTh>Cpf</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh>Telefone</MudTh>
+            <MudTh>Status</MudTh>
+            <MudTh>Ações</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nome">@context.Name</MudTd>
+            <MudTd DataLabel="Cpf">@MaskCpfPhoneHelper.FormatCpf(context.Cpf)</MudTd>
+            <MudTd DataLabel="Email">@context.Email</MudTd>
+            <MudTd DataLabel="Telefone">@MaskCpfPhoneHelper.FormatPhone(context.Phone)</MudTd>
+            <MudTd DataLabel="Status">@context.Status</MudTd>
+            <MudTd>
+                <MudMenu Icon="@Icons.Material.Filled.MoreHoriz" Color="Color.Primary" Dense="true">
+                    <MudMenuItem OnClick="() => EditCustomer(context)">
+                        <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-2" Color="Color.Primary" /> 
+                        Editar
+                    </MudMenuItem>
+                    <MudMenuItem OnClick="() => DeleteCustomer(context.Cpf)">
+                        <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-2" Color="Color.Secondary" /> 
+                        Excluir
+                    </MudMenuItem>
+                </MudMenu>
+
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+
+@code {
+
+    private bool addEditDialogOpen = false;
+    private List<CustomerViewModel> customers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCustomers();
+    }
+
+    private async Task LoadCustomers()
+    {
+        customers = (await Mediator.Send(new GetCustomersQuery()))?.ToList() ?? new();
+    }
+
+    private async Task ShowAddCustomer()
+    {
+        var parameters = new DialogParameters
+        {
+            { "Model", new CreateCustomerInputModel() }
+        };
+
+        var dialog = DialogService.Show<CreateCustomerDialog>("Novo Cliente", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var model = (CreateCustomerInputModel)result.Data;
+            var response = await Mediator.Send(new CreateCustomerCommand(model));
+
+            if (!response.Success)
+            {
+                foreach (var error in response.Errors ?? Enumerable.Empty<string>())
+                    Snackbar.Add(error, Severity.Error);
+
+                return;
+            }
+
+            Snackbar.Add("Cliente criado com sucesso!", Severity.Success);
+            await LoadCustomers();
+        }
+    }
+
+    private async Task EditCustomer(CustomerViewModel customer)
+    {
+        var parameters = new DialogParameters
+        {
+            { "Model", new CustomerInputModel
+                {
+                    Name = customer.Name,
+                    Cpf = customer.Cpf,
+                    Email = customer.Email,
+                    Phone = customer.Phone
+                }
+            }
+        };
+
+        var dialog = DialogService.Show<EditCustomerDialog>("Editar Cliente", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var model = (CustomerInputModel?)result.Data;
+
+            if (model is null)
+            {
+                Snackbar.Add("Erro ao obter o cliente para atualizar", Severity.Error);
+            }
+
+            var response = await Mediator.Send(new UpdateCustomerCommand(model.Cpf, model));
+
+            if (!response.Success)
+            {
+                // Mostre os erros (exemplo usando MudBlazor snackbar)
+                foreach (var error in response.Errors)
+                {
+                    Snackbar.Add(error, Severity.Error);
+                }
+                return;
+            }
+
+            Snackbar.Add("Cliente atualizado com sucesso!", Severity.Success);
+            await LoadCustomers();
+        }
+    }
+
+    private async Task DeleteCustomer(string cpf)
+    {
+        Console.WriteLine("entrei no deletar");
+        await Mediator.Send(new RemoveCustomerCommand(cpf));
+        await LoadCustomers();
+    }
+
+    
+
+}

@@ -1,0 +1,70 @@
+﻿@using MudBlazor
+@using TestingCRUD.Aplication.InputModels
+@using TestingCRUD.Aplication.Shared
+
+@* <MudDialog>
+    <MudForm @ref="form" OnValidSubmit="Submit">
+        <MudDialogContent>
+            <MudTextField @bind-Value="Model.Name"
+                          Label="Nome"
+                          Required="true"
+                          For="@(() => Model.Name)" />
+            <MudTextField @bind-Value="Model.Cpf"
+                          Label="Cpf"
+                          Mask="@(new PatternMask("000.000.000-00"))"
+                          Required="true"
+                          For="@(() => Model.Cpf)" />
+            <MudTextField @bind-Value="Model.Email"
+                          Label="Email"
+                          Required="true"
+                          For="@(() => Model.Email)" />
+            <MudTextField @bind-Value="Model.Phone"
+                          Label="Telefone"
+                          Mask="@(new PatternMask("(00) 0 0000-0000"))"
+                          Required="true"
+                          For="@(() => Model.Phone)" />
+        </MudDialogContent>
+        <MudDialogActions>
+            <MudButton Color="Color.Primary" Disabled="@(!form.IsValid)" ButtonType="ButtonType.Submit">
+                Salvar
+            </MudButton>
+            <MudButton OnClick="MudDialog.Cancel">
+                Cancelar
+            </MudButton>
+        </MudDialogActions>
+    </MudForm>
+</MudDialog> *@
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @bind-Value="Model.Name" Label="Nome" />
+        <MudTextField @bind-Value="Model.Cpf" Label="Cpf" />
+        <MudTextField @bind-Value="Model.Email" Label="Email" />
+        <MudTextField @bind-Value="Model.Phone" Label="Telefone" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Submit">Salvar</MudButton>
+        <MudButton OnClick="() => MudDialog.Cancel()">Cancelar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] public IMudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public CreateCustomerInputModel Model { get; set; } = new();
+
+    private MudForm form;
+
+    private async Task Submit()
+    {
+        await form.Validate();
+
+        if (!form.IsValid)
+            return;
+
+        // Limpa as máscaras
+        Model.Cpf = MaskCpfPhoneHelper.OnlyDigits(Model.Cpf);
+        Model.Phone = MaskCpfPhoneHelper.OnlyDigits(Model.Phone);
+
+        MudDialog.Close(DialogResult.Ok(Model));
+    }
+}

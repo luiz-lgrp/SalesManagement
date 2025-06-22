@@ -1,26 +1,27 @@
-﻿using MediatR;
-using FluentValidation;
-
+﻿using FluentValidation;
+using MediatR;
+using TestingCRUD.Aplication.InputModels;
+using TestingCRUD.Aplication.Shared;
+using TestingCRUD.Application.Commands.CustomerCommands;
+using TestingCRUD.Application.InputModels;
+using TestingCRUD.Application.ViewModels.CustomerViewModels;
 using TestingCRUD.Domain.Models;
 using TestingCRUD.Domain.Repositories;
-using TestingCRUD.Application.InputModels;
-using TestingCRUD.Application.Commands.CustomerCommands;
-using TestingCRUD.Application.ViewModels.CustomerViewModels;
 
 namespace TestingCRUD.Application.Handlers.CustomerHandlers;
-public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerViewModel>
+public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Result<CustomerViewModel>>
 {
     private readonly ICustomerRepository _customerRepository;
-    private readonly IValidator<CustomerInputModel> _validator;
+    private readonly IValidator<CreateCustomerInputModel> _validator;
 
     public CreateCustomerCommandHandler(ICustomerRepository customerRepository, 
-        IValidator<CustomerInputModel> validator)
+        IValidator<CreateCustomerInputModel> validator)
     {
         _customerRepository = customerRepository;
         _validator = validator;
     }
 
-    public async Task<CustomerViewModel> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CustomerViewModel>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var createModel = request.CreateCustomer;
 
@@ -28,7 +29,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 
         if (!validationResult.IsValid)
         {
-            throw new ValidationException(validationResult.Errors);
+            return Result<CustomerViewModel>.Fail(validationResult.Errors.Select(e => e.ErrorMessage));
         }
 
         var customer = new Customer(
@@ -40,7 +41,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         var createdCustomer = await _customerRepository.CreateAsync(customer, cancellationToken);
 
         if (createdCustomer is null)
-            return null;
+            return Result<CustomerViewModel>.Fail(new[] { "Erro ao criar cliente.\n" + "Tente novamente." });
 
         var customerVM = new CustomerViewModel
         {
@@ -51,6 +52,6 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
             Status = createdCustomer.Status,
         };
 
-        return customerVM;
+        return Result<CustomerViewModel>.Ok(customerVM);
     }
 }
